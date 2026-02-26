@@ -1,0 +1,45 @@
+.tracking-wide {
+    letter-spacing: 1px;
+}
+
+.fw-light {
+    font-weight: 300;
+}
+
+/* Стили для поставщиков */
+.supplier-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #333 !important;
+    padding: 5px 0;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.supplier-link:hover {
+    color: #E2725B !important;
+    transform: translateY(-2px);
+    border-bottom-color: #E2725B;
+}
+
+.supplier-link i {
+    transition: all 0.2s ease;
+}
+
+.supplier-link:hover i {
+    color: #E2725B !important;
+}
+
+/* Стили для графиков */
+.financial-chart {
+    position: relative;
+    height: 250px;
+    padding: 10px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2.5rem;
+    }
+}

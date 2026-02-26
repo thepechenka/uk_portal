@@ -3,15 +3,18 @@
 
 {% block title %}О компании - УК "Новый город"{% endblock %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="container py-5">
-    <!-- Заголовок -->
+
     <div class="text-center mb-5">
         <h1 class="display-4 fw-bold" style="color: #E2725B;">О компании</h1>
         <p class="lead text-muted">Управляющая компания "Новый город"</p>
     </div>
 
-    <!-- Основная информация в минималистичном стиле -->
     <div class="row mb-5">
         <div class="col-lg-4 mb-4">
             <div class="text-center">
@@ -33,9 +36,7 @@
         </div>
     </div>
 
-    <!-- Две колонки: основная информация и контакты -->
     <div class="row">
-        <!-- Левая колонка - основная информация -->
         <div class="col-lg-7 mb-4">
             <div class="pe-lg-4">
                 <h5 class="fw-normal mb-4" style="color: #E2725B; letter-spacing: 1px;">ОСНОВНЫЕ СВЕДЕНИЯ</h5>
@@ -91,7 +92,6 @@
             </div>
         </div>
 
-        <!-- Правая колонка - контакты и режим работы -->
         <div class="col-lg-5 mb-4">
             <div class="ps-lg-4">
                 <h5 class="fw-normal mb-4" style="color: #E2725B; letter-spacing: 1px;">КОНТАКТЫ</h5>
@@ -172,37 +172,14 @@
         </div>
     </div>
 
- <!-- Карта с API -->
-<div class="row mt-4">
-    <div class="col-12">
-        <div class="mb-5">
-            <div id="company-map" style="width: 100%; height: 300px; border-radius: 12px;"></div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="mb-5">
+                <div id="company-map" style="width: 100%; height: 300px; border-radius: 12px;"></div>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="https://api-maps.yandex.ru/2.1/?apikey=309e23b8-6ae5-4e88-afdc-e3dfcd9c3235&lang=ru_RU"></script>
-<script>
-    ymaps.ready(function() {
-        var companyMap = new ymaps.Map('company-map', {
-            center: [53.768544, 87.127878],
-            zoom: 17,
-            controls: ['zoomControl']
-        });
-
-        var placemark = new ymaps.Placemark([53.768544, 87.127878], {
-            hintContent: 'ООО "Новый город"',
-            balloonContent: 'ул. Павловского, 11А'
-        }, {
-            preset: 'islands#circleIcon',
-            iconColor: '#E2725B'
-        });
-
-        companyMap.geoObjects.add(placemark);
-    });
-</script>
-
-    <!-- Выполняемые работы по содержанию и ремонту -->
     <div class="row mt-5">
         <div class="col-12">
             <h5 class="fw-normal mb-4" style="color: #E2725B; letter-spacing: 1px;">ВЫПОЛНЯЕМЫЕ РАБОТЫ ПО СОДЕРЖАНИЮ И РЕМОНТУ (2025 г.)</h5>
@@ -243,7 +220,6 @@
         </div>
     </div>
 
-    <!-- Региональная программа капитального ремонта -->
     <div class="row mt-4">
         <div class="col-12">
             <div class="card border-0 shadow-sm">
@@ -277,188 +253,123 @@
         </div>
     </div>
 
- <!-- Поставщики коммунальных ресурсов -->
-<div class="row mt-4">
-    <div class="col-12">
-        <div class="card border-0 shadow-sm">
-            <div class="card-body p-4">
-                <h5 class="fw-normal mb-3" style="color: #E2725B; letter-spacing: 1px;">ПОСТАВЩИКИ КОММУНАЛЬНЫХ РЕСУРСОВ</h5>
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="fw-normal mb-3" style="color: #E2725B; letter-spacing: 1px;">ПОСТАВЩИКИ КОММУНАЛЬНЫХ РЕСУРСОВ</h5>
 
-                <div class="row">
-                    <div class="col-md-6 col-lg-3 mb-3">
-                        <a href="https://my-gkh.ru/getorganization/oao-kuzneckaya-tec" target="_blank" class="supplier-link">
-                            <i class="bi bi-building me-2" style="color: #E2725B;"></i>
-                            АО "КУЗНЕЦКАЯ ТЭЦ"
-                        </a>
-                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <a href="https://my-gkh.ru/getorganization/oao-kuzneckaya-tec" target="_blank" class="supplier-link">
+                                <i class="bi bi-building me-2" style="color: #E2725B;"></i>
+                                АО "КУЗНЕЦКАЯ ТЭЦ"
+                            </a>
+                        </div>
 
-                    <div class="col-md-6 col-lg-3 mb-3">
-                        <a href="https://my-gkh.ru/getorganization/ooo-vodokanal-kemerovskaya-4217166136" target="_blank" class="supplier-link">
-                            <i class="bi bi-droplet me-2" style="color: #E2725B;"></i>
-                            ООО "ВОДОКАНАЛ"
-                        </a>
-                    </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <a href="https://my-gkh.ru/getorganization/ooo-vodokanal-kemerovskaya-4217166136" target="_blank" class="supplier-link">
+                                <i class="bi bi-droplet me-2" style="color: #E2725B;"></i>
+                                ООО "ВОДОКАНАЛ"
+                            </a>
+                        </div>
 
-                    <div class="col-md-6 col-lg-3 mb-3">
-                        <a href="https://my-gkh.ru/getorganization/ooo-energotranzit" target="_blank" class="supplier-link">
-                            <i class="bi bi-lightning me-2" style="color: #E2725B;"></i>
-                            ООО "ЭНЕРГОТРАНЗИТ"
-                        </a>
-                    </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <a href="https://my-gkh.ru/getorganization/ooo-energotranzit" target="_blank" class="supplier-link">
+                                <i class="bi bi-lightning me-2" style="color: #E2725B;"></i>
+                                ООО "ЭНЕРГОТРАНЗИТ"
+                            </a>
+                        </div>
 
-                    <div class="col-md-6 col-lg-3 mb-3">
-                        <a href="https://my-gkh.ru/getorganization/pao-kuzbassenergosbyt" target="_blank" class="supplier-link">
-                            <i class="bi bi-calculator me-2" style="color: #E2725B;"></i>
-                            ПАО "КУЗБАССЭНЕРГОСБЫТ"
-                        </a>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <a href="https://my-gkh.ru/getorganization/pao-kuzbassenergosbyt" target="_blank" class="supplier-link">
+                                <i class="bi bi-calculator me-2" style="color: #E2725B;"></i>
+                                ПАО "КУЗБАССЭНЕРГОСБЫТ"
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<style>
-.supplier-link {
-    display: inline-block;
-    text-decoration: none;
-    color: #333 !important;
-    padding: 5px 0;
-    transition: all 0.2s ease;
-    border-bottom: 1px solid transparent;
-}
+    <div class="row mt-5">
+        <div class="col-12">
+            <h5 class="fw-normal mb-5 text-center" style="color: #E2725B; letter-spacing: 2px;">ФИНАНСОВЫЕ ПОКАЗАТЕЛИ 2016-2024</h5>
 
-.supplier-link:hover {
-    color: #E2725B !important;
-    transform: translateY(-2px);
-    border-bottom-color: #E2725B;
-}
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    <p class="text-muted small mb-4 text-center">ВЫРУЧКА (МЛН ₽)</p>
+                    <div class="financial-chart">
+                        <svg viewBox="0 0 500 220" style="width: 100%; height: 100%;">
+                            <line x1="40" y1="200" x2="460" y2="200" stroke="#dee2e6" stroke-width="1"/>
+                            <line x1="40" y1="20" x2="40" y2="200" stroke="#dee2e6" stroke-width="1"/>
+                            <polyline points="70,180 110,160 150,140 190,120 230,100 270,120 310,100 350,80 390,60" stroke="#E2725B" stroke-width="2.5" fill="none"/>
+                            <circle cx="70" cy="180" r="6" fill="#E2725B"/>
+                            <circle cx="110" cy="160" r="6" fill="#E2725B"/>
+                            <circle cx="150" cy="140" r="6" fill="#E2725B"/>
+                            <circle cx="190" cy="120" r="6" fill="#E2725B"/>
+                            <circle cx="230" cy="100" r="6" fill="#E2725B"/>
+                            <circle cx="270" cy="120" r="6" fill="#E2725B"/>
+                            <circle cx="310" cy="100" r="6" fill="#E2725B"/>
+                            <circle cx="350" cy="80" r="6" fill="#E2725B"/>
+                            <circle cx="390" cy="60" r="6" fill="#E2725B"/>
+                            <text x="70" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2016</text>
+                            <text x="110" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2017</text>
+                            <text x="150" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2018</text>
+                            <text x="190" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2019</text>
+                            <text x="230" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2020</text>
+                            <text x="270" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2021</text>
+                            <text x="310" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2022</text>
+                            <text x="350" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2023</text>
+                            <text x="390" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2024</text>
+                        </svg>
+                    </div>
+                </div>
 
-.supplier-link i {
-    transition: all 0.2s ease;
-}
-
-.supplier-link:hover i {
-    color: #E2725B !important;
-}
-</style>
-
-    <!-- Финансовые показатели - точечный график -->
-<div class="row mt-5">
-    <div class="col-12">
-        <h5 class="fw-normal mb-5 text-center" style="color: #E2725B; letter-spacing: 2px;">ФИНАНСОВЫЕ ПОКАЗАТЕЛИ 2016-2024</h5>
-
-        <div class="row">
-            <!-- Выручка -->
-            <div class="col-md-6 mb-5">
-                <p class="text-muted small mb-4 text-center">ВЫРУЧКА (МЛН ₽)</p>
-                <div style="position: relative; height: 250px; padding: 10px;">
-                    <svg viewBox="0 0 500 220" style="width: 100%; height: 100%;">
-                        <!-- Оси -->
-                        <line x1="40" y1="200" x2="460" y2="200" stroke="#dee2e6" stroke-width="1"/>
-                        <line x1="40" y1="20" x2="40" y2="200" stroke="#dee2e6" stroke-width="1"/>
-
-                        <!-- Линия, соединяющая точки -->
-                        <polyline points="
-                            70,180
-                            110,160
-                            150,140
-                            190,120
-                            230,100
-                            270,120
-                            310,100
-                            350,80
-                            390,60"
-                            stroke="#E2725B" stroke-width="2.5" fill="none"/>
-
-                        <!-- Точки данных -->
-                        <circle cx="70" cy="180" r="6" fill="#E2725B"/>
-                        <circle cx="110" cy="160" r="6" fill="#E2725B"/>
-                        <circle cx="150" cy="140" r="6" fill="#E2725B"/>
-                        <circle cx="190" cy="120" r="6" fill="#E2725B"/>
-                        <circle cx="230" cy="100" r="6" fill="#E2725B"/>
-                        <circle cx="270" cy="120" r="6" fill="#E2725B"/>
-                        <circle cx="310" cy="100" r="6" fill="#E2725B"/>
-                        <circle cx="350" cy="80" r="6" fill="#E2725B"/>
-                        <circle cx="390" cy="60" r="6" fill="#E2725B"/>
-
-                        <!-- Годы -->
-                        <text x="70" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2016</text>
-                        <text x="110" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2017</text>
-                        <text x="150" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2018</text>
-                        <text x="190" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2019</text>
-                        <text x="230" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2020</text>
-                        <text x="270" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2021</text>
-                        <text x="310" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2022</text>
-                        <text x="350" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2023</text>
-                        <text x="390" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2024</text>
-                    </svg>
+                <div class="col-md-6 mb-5">
+                    <p class="text-muted small mb-4 text-center">ЧИСТАЯ ПРИБЫЛЬ (МЛН ₽)</p>
+                    <div class="financial-chart">
+                        <svg viewBox="0 0 500 220" style="width: 100%; height: 100%;">
+                            <line x1="40" y1="200" x2="460" y2="200" stroke="#dee2e6" stroke-width="1"/>
+                            <line x1="40" y1="20" x2="40" y2="200" stroke="#dee2e6" stroke-width="1"/>
+                            <polyline points="70,150 110,135 150,120 190,105 230,190 270,165 310,140 350,115 390,90" stroke="#E2725B" stroke-width="2.5" fill="none"/>
+                            <circle cx="70" cy="150" r="6" fill="#E2725B"/>
+                            <circle cx="110" cy="135" r="6" fill="#E2725B"/>
+                            <circle cx="150" cy="120" r="6" fill="#E2725B"/>
+                            <circle cx="190" cy="105" r="6" fill="#E2725B"/>
+                            <circle cx="230" cy="190" r="6" fill="#E2725B"/>
+                            <circle cx="270" cy="165" r="6" fill="#E2725B"/>
+                            <circle cx="310" cy="140" r="6" fill="#E2725B"/>
+                            <circle cx="350" cy="115" r="6" fill="#E2725B"/>
+                            <circle cx="390" cy="90" r="6" fill="#E2725B"/>
+                            <text x="70" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2016</text>
+                            <text x="110" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2017</text>
+                            <text x="150" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2018</text>
+                            <text x="190" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2019</text>
+                            <text x="230" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2020</text>
+                            <text x="270" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2021</text>
+                            <text x="310" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2022</text>
+                            <text x="350" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2023</text>
+                            <text x="390" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2024</text>
+                        </svg>
+                    </div>
                 </div>
             </div>
 
-            <!-- Чистая прибыль -->
-            <div class="col-md-6 mb-5">
-                <p class="text-muted small mb-4 text-center">ЧИСТАЯ ПРИБЫЛЬ (МЛН ₽)</p>
-                <div style="position: relative; height: 250px; padding: 10px;">
-                    <svg viewBox="0 0 500 220" style="width: 100%; height: 100%;">
-                        <!-- Оси -->
-                        <line x1="40" y1="200" x2="460" y2="200" stroke="#dee2e6" stroke-width="1"/>
-                        <line x1="40" y1="20" x2="40" y2="200" stroke="#dee2e6" stroke-width="1"/>
-
-                        <!-- Линия, соединяющая точки -->
-                        <polyline points="
-                            70,150
-                            110,135
-                            150,120
-                            190,105
-                            230,190
-                            270,165
-                            310,140
-                            350,115
-                            390,90"
-                            stroke="#E2725B" stroke-width="2.5" fill="none"/>
-
-                        <!-- Точки данных -->
-                        <circle cx="70" cy="150" r="6" fill="#E2725B"/>
-                        <circle cx="110" cy="135" r="6" fill="#E2725B"/>
-                        <circle cx="150" cy="120" r="6" fill="#E2725B"/>
-                        <circle cx="190" cy="105" r="6" fill="#E2725B"/>
-                        <circle cx="230" cy="190" r="6" fill="#E2725B"/>
-                        <circle cx="270" cy="165" r="6" fill="#E2725B"/>
-                        <circle cx="310" cy="140" r="6" fill="#E2725B"/>
-                        <circle cx="350" cy="115" r="6" fill="#E2725B"/>
-                        <circle cx="390" cy="90" r="6" fill="#E2725B"/>
-
-                        <!-- Годы -->
-                        <text x="70" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2016</text>
-                        <text x="110" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2017</text>
-                        <text x="150" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2018</text>
-                        <text x="190" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2019</text>
-                        <text x="230" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2020</text>
-                        <text x="270" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2021</text>
-                        <text x="310" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2022</text>
-                        <text x="350" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2023</text>
-                        <text x="390" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2024</text>
-                    </svg>
+            <div class="d-flex justify-content-center mt-3">
+                <div class="d-flex align-items-center me-4">
+                    <div style="width: 30px; height: 2px; background: #E2725B; margin-right: 8px;"></div>
+                    <span class="text-muted small">Динамика показателя</span>
                 </div>
-            </div>
-        </div>
-
-        <!-- Легенда -->
-        <div class="d-flex justify-content-center mt-3">
-            <div class="d-flex align-items-center me-4">
-                <div style="width: 30px; height: 2px; background: #E2725B; margin-right: 8px;"></div>
-                <span class="text-muted small">Динамика показателя</span>
-            </div>
-            <div class="d-flex align-items-center">
-                <div style="width: 12px; height: 12px; border-radius: 50%; background: #E2725B; margin-right: 8px;"></div>
-                <span class="text-muted small">Годовые значения</span>
+                <div class="d-flex align-items-center">
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: #E2725B; margin-right: 8px;"></div>
+                    <span class="text-muted small">Годовые значения</span>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-    <!-- Нижний колонтитул с сотрудниками -->
     <div class="row mt-5 pt-4" style="border-top: 1px solid #f0f0f0;">
         <div class="col-12">
             <div class="d-flex justify-content-center gap-5">
@@ -482,13 +393,9 @@
         </div>
     </div>
 </div>
+{% endblock %}
 
-<style>
-    .tracking-wide {
-        letter-spacing: 1px;
-    }
-    .fw-light {
-        font-weight: 300;
-    }
-</style>
+{% block extra_js %}
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=309e23b8-6ae5-4e88-afdc-e3dfcd9c3235&lang=ru_RU"></script>
+    <script src="{% static 'js/about.js' %}"></script>
 {% endblock %}

@@ -1,0 +1,79 @@
+.nav-hover {
+        position: relative;
+        display: inline-block;
+        transition: all 0.3s ease !important;
+}
+
+.nav-hover:hover {
+        transform: translateY(-3px);
+        text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3) !important;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+    }
+
+    .btn-hover {
+        transition: all 0.3s ease !important;
+    }
+
+    .btn-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3) !important;
+        background-color: #ffffff !important;
+    }
+
+    .dropdown-item-hover {
+        transition: all 0.3s ease !important;
+    }
+
+    .dropdown-item-hover:hover {
+        transform: translateX(5px);
+        background-color: #E2725B !important;
+        color: white !important;
+    }
+
+    .dropdown-hover {
+        transition: all 0.3s ease !important;
+    }
+
+    .dropdown-hover:hover {
+        transform: translateY(2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Яркий белый логотип */
+    .navbar-brand {
+        color: white !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .navbar-brand i {
+        color: white !important;
+    }
+
+    .navbar-brand:hover {
+        transform: translateY(-2px);
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    /* Убираем синий цвет по умолчанию */
+    .navbar-brand:visited, .navbar-brand:link, .navbar-brand:active {
+        color: white !important;
+    }
+
+    /* Увеличиваем шапку */
+    .navbar {
+        padding: 12px 0 !important;
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem !important;
+    }
+
+    .nav-link {
+        font-size: 1.05rem !important;
+    }
+
+    .btn {
+        font-size: 1rem !important;
+    }

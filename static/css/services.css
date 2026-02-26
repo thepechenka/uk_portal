@@ -1,0 +1,172 @@
+.services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+}
+
+/* Заголовок */
+.services-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.services-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #E2725B;
+    margin-bottom: 0.5rem;
+}
+
+.services-subtitle {
+    color: #6c757d;
+    margin: 0;
+}
+
+/* Информационный блок */
+.services-info-block {
+    margin-bottom: 3rem;
+    padding: 1rem;
+    border-left: 4px solid #E2725B;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+}
+
+.services-info-icon {
+    color: #E2725B;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+}
+
+.services-info-text {
+    color: #6c757d;
+}
+
+/* Секция услуг */
+.services-section {
+    margin-bottom: 3rem;
+}
+
+.services-section-title {
+    color: #E2725B;
+    font-weight: 400;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Элемент услуги */
+.services-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.services-item-label {
+    color: #6c757d;
+    flex: 1;
+    padding-right: 1rem;
+}
+
+.services-item-price {
+    color: #E2725B;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+/* Футер с контактами */
+.services-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    gap: 5rem;
+    padding-left: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+}
+
+.services-footer-left,
+.services-footer-right {
+    width: 280px;
+}
+
+.services-footer-title {
+    color: #E2725B;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.services-footer-text {
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.services-footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.services-footer-list-item {
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.services-footer-list-icon {
+    color: #E2725B;
+    margin-right: 0.5rem;
+}
+
+.services-footer-contact {
+    margin-bottom: 0.25rem;
+}
+
+.services-footer-note {
+    color: #6c757d;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .services-container {
+        padding: 2rem 1rem;
+    }
+
+    .services-title {
+        font-size: 2rem;
+    }
+
+    .services-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .services-item-label {
+        margin-bottom: 0.25rem;
+    }
+
+    .services-footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .services-footer-left,
+    .services-footer-right {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .services-section-title {
+        font-size: 1rem;
+    }
+
+    .services-item-label {
+        font-size: 0.9rem;
+    }
+}

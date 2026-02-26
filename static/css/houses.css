@@ -1,0 +1,120 @@
+.stat-card {
+    border-radius: 10px;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+.stat-card:hover {
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+.mini-map {
+    cursor: default;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.mini-map:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.house-card {
+    transition: all 0.3s ease;
+    border: 1px solid #dee2e6;
+}
+.house-card:hover {
+    border-color: #E2725B;
+}
+.btn-show-details:hover {
+    color: #E2725B;
+    border-color: #E2725B;
+    transform: translateY(-2px);
+}
+
+/* Детали дома */
+.house-details {
+    padding: 5px;
+}
+.details-section {
+    margin-bottom: 20px;
+}
+.details-section h6 {
+    color: #E2725B;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #E2725B;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+}
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+.detail-label {
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+.detail-value {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Отчеты */
+.reports-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+.report-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+.report-item i {
+    color: #E2725B;
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+}
+.report-item:hover {
+    background: #E2725B !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(226, 114, 91, 0.3);
+}
+.report-item:hover i {
+    color: white !important;
+}
+.report-year {
+    font-size: 0.9rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .stat-card h2 {
+        font-size: 2rem;
+    }
+}
+@media (max-width: 500px) {
+    .details-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}

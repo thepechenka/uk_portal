@@ -3,6 +3,10 @@
 
 {% block title %}Новости - УК "Новый город"{% endblock %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/news.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="container py-5">
     <h1 class="text-center mb-5" style="color: #E2725B;">Новости и объявления</h1>
@@ -114,67 +118,4 @@
     </nav>
     {% endif %}
 </div>
-
-<style>
-.news-card {
-    transition: all 0.3s ease;
-    border: 1px solid #dee2e6;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.news-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(226, 114, 91, 0.2);
-    border-color: #E2725B;
-}
-
-.news-card .card-img-top {
-    transition: transform 0.3s ease;
-}
-
-.news-card:hover .card-img-top {
-    transform: scale(1.05);
-}
-
-.news-content {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #333;
-}
-
-.news-content p {
-    margin-bottom: 1.5rem;
-}
-
-.pagination .page-link {
-    border: none;
-    margin: 0 3px;
-    border-radius: 8px;
-    font-weight: 500;
-}
-
-.pagination .page-link:hover {
-    background-color: #E2725B;
-    color: white !important;
-}
-
-.pagination .active .page-link {
-    box-shadow: 0 5px 15px rgba(226, 114, 91, 0.3);
-}
-
-.modal-content {
-    border-radius: 15px;
-    border: none;
-}
-
-.modal-header {
-    border-radius: 15px 15px 0 0;
-    padding: 1.2rem 1.5rem;
-}
-
-.modal-header .btn-close {
-    filter: brightness(0) invert(1);
-}
-</style>
 {% endblock %}
