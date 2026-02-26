@@ -1,0 +1,494 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}О компании - УК "Новый город"{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Заголовок -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold" style="color: #E2725B;">О компании</h1>
+        <p class="lead text-muted">Управляющая компания "Новый город"</p>
+    </div>
+
+    <!-- Основная информация в минималистичном стиле -->
+    <div class="row mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="text-center">
+                <div class="display-4 fw-light mb-2" style="color: #E2725B;">32</div>
+                <p class="text-muted small text-uppercase tracking-wide">Дома</p>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="text-center">
+                <div class="display-4 fw-light mb-2" style="color: #E2725B;">63</div>
+                <p class="text-muted small text-uppercase tracking-wide">Сотрудника</p>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="text-center">
+                <div class="display-4 fw-light mb-2" style="color: #E2725B;">2016</div>
+                <p class="text-muted small text-uppercase tracking-wide">Год основания</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Две колонки: основная информация и контакты -->
+    <div class="row">
+        <!-- Левая колонка - основная информация -->
+        <div class="col-lg-7 mb-4">
+            <div class="pe-lg-4">
+                <h5 class="fw-normal mb-4" style="color: #E2725B; letter-spacing: 1px;">ОСНОВНЫЕ СВЕДЕНИЯ</h5>
+
+                <div class="mb-4 pb-2" style="border-bottom: 1px solid #f0f0f0;">
+                    <div class="row">
+                        <div class="col-4 text-muted small">Полное наименование</div>
+                        <div class="col-8">ООО "НОВЫЙ ГОРОД"</div>
+                    </div>
+                </div>
+
+                <div class="mb-4 pb-2" style="border-bottom: 1px solid #f0f0f0;">
+                    <div class="row">
+                        <div class="col-4 text-muted small">Руководитель</div>
+                        <div class="col-8">Киселев Вячеслав Анатольевич <span class="text-muted small">(с 2016)</span></div>
+                    </div>
+                </div>
+
+                <div class="mb-4 pb-2" style="border-bottom: 1px solid #f0f0f0;">
+                    <div class="row">
+                        <div class="col-4 text-muted small">ИНН/КПП</div>
+                        <div class="col-8">4217175437 / 421701001</div>
+                    </div>
+                </div>
+
+                <div class="mb-4 pb-2" style="border-bottom: 1px solid #f0f0f0;">
+                    <div class="row">
+                        <div class="col-4 text-muted small">ОГРН</div>
+                        <div class="col-8">1164217050491</div>
+                    </div>
+                </div>
+
+                <div class="mb-4 pb-2" style="border-bottom: 1px solid #f0f0f0;">
+                    <div class="row">
+                        <div class="col-4 text-muted small">Лицензия</div>
+                        <div class="col-8">Л045-01309-42/00602755 от 16.03.2016</div>
+                    </div>
+                </div>
+
+                <div class="mb-4 pb-2" style="border-bottom: 1px solid #f0f0f0;">
+                    <div class="row">
+                        <div class="col-4 text-muted small">Деятельность</div>
+                        <div class="col-8">Управление недвижимым имуществом</div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="row">
+                        <div class="col-4 text-muted small">Юридический адрес</div>
+                        <div class="col-8">654007, г. Новокузнецк, ул. Павловского, д. 11А, помещ. 210</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Правая колонка - контакты и режим работы -->
+        <div class="col-lg-5 mb-4">
+            <div class="ps-lg-4">
+                <h5 class="fw-normal mb-4" style="color: #E2725B; letter-spacing: 1px;">КОНТАКТЫ</h5>
+
+                <div class="mb-4">
+                    <div class="d-flex mb-3">
+                        <div style="width: 30px;"><i class="bi bi-geo-alt" style="color: #E2725B;"></i></div>
+                        <div>
+                            <div class="fw-light small text-muted">Офис</div>
+                            <div>ул. Павловского, 11А</div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-3">
+                        <div style="width: 30px;"><i class="bi bi-telephone" style="color: #E2725B;"></i></div>
+                        <div>
+                            <div class="fw-light small text-muted">Телефон</div>
+                            <div>+7 3843 20-02-82</div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-3">
+                        <div style="width: 30px;"><i class="bi bi-telephone-forward" style="color: #E2725B;"></i></div>
+                        <div>
+                            <div class="fw-light small text-muted">Диспетчерская (круглосуточно)</div>
+                            <div>+7 3843 92-62-26</div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-3">
+                        <div style="width: 30px;"><i class="bi bi-envelope" style="color: #E2725B;"></i></div>
+                        <div>
+                            <div class="fw-light small text-muted">Email</div>
+                            <div>novyjgorod@mail.ru</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="fw-normal mb-4 mt-5" style="color: #E2725B; letter-spacing: 1px;">РЕЖИМ РАБОТЫ</h5>
+
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Пн - Чт</span>
+                        <span>9:00 - 17:00</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Пятница</span>
+                        <span>9:00 - 15:00</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Сб - Вс</span>
+                        <span class="text-muted">выходной</span>
+                    </div>
+                    <div class="text-muted small mt-2">Перерыв 12:00 - 13:00</div>
+                </div>
+
+                <h5 class="fw-normal mb-4 mt-5" style="color: #E2725B; letter-spacing: 1px;">ПРИЕМ ГРАЖДАН</h5>
+
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Понедельник</span>
+                        <span>14:00 - 16:30</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Вторник</span>
+                        <span>8:30 - 16:30</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Четверг</span>
+                        <span>8:30 - 16:30</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Пятница</span>
+                        <span>14:00 - 16:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <!-- Карта с API -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="mb-5">
+            <div id="company-map" style="width: 100%; height: 300px; border-radius: 12px;"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://api-maps.yandex.ru/2.1/?apikey=309e23b8-6ae5-4e88-afdc-e3dfcd9c3235&lang=ru_RU"></script>
+<script>
+    ymaps.ready(function() {
+        var companyMap = new ymaps.Map('company-map', {
+            center: [53.768544, 87.127878],
+            zoom: 17,
+            controls: ['zoomControl']
+        });
+
+        var placemark = new ymaps.Placemark([53.768544, 87.127878], {
+            hintContent: 'ООО "Новый город"',
+            balloonContent: 'ул. Павловского, 11А'
+        }, {
+            preset: 'islands#circleIcon',
+            iconColor: '#E2725B'
+        });
+
+        companyMap.geoObjects.add(placemark);
+    });
+</script>
+
+    <!-- Выполняемые работы по содержанию и ремонту -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h5 class="fw-normal mb-4" style="color: #E2725B; letter-spacing: 1px;">ВЫПОЛНЯЕМЫЕ РАБОТЫ ПО СОДЕРЖАНИЮ И РЕМОНТУ (2025 г.)</h5>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h6 class="fw-bold mb-3" style="color: #E2725B;">Основные услуги</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-dot me-2" style="color: #E2725B;"></i>Текущий ремонт</li>
+                                <li class="mb-2"><i class="bi bi-dot me-2" style="color: #E2725B;"></i>Аренда контейнеров</li>
+                                <li class="mb-2"><i class="bi bi-dot me-2" style="color: #E2725B;"></i>ОДН Электроэнергия</li>
+                                <li class="mb-2"><i class="bi bi-dot me-2" style="color: #E2725B;"></i>ОДН холодное водоснабжение</li>
+                                <li class="mb-2"><i class="bi bi-dot me-2" style="color: #E2725B;"></i>ОДН горячее водоснабжение</li>
+                                <li class="mb-2"><i class="bi bi-dot me-2" style="color: #E2725B;"></i>ОДН Водоотведение</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h6 class="fw-bold mb-3" style="color: #E2725B;">Обслуживание</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-dot me-2" style="color: #E2725B;"></i>Управление многоквартирным домом, в том числе услуги абон. отдела и паспортного стола</li>
+                                <li class="mb-2"><i class="bi bi-dot me-2" style="color: #E2725B;"></i>Аварийно-ремонтное и диспетчерское обслуживание</li>
+                                <li class="mb-2"><i class="bi bi-dot me-2" style="color: #E2725B;"></i>Техническое обслуживание внутридомового инженерного оборудования и конструктивных элементов зданий</li>
+                                <li class="mb-2"><i class="bi bi-dot me-2" style="color: #E2725B;"></i>Дератизация, дезинфекция</li>
+                                <li class="mb-2"><i class="bi bi-dot me-2" style="color: #E2725B;"></i>Содержание придомовой территории, контейнеров и мусоропровода</li>
+                                <li class="mb-2"><i class="bi bi-dot me-2" style="color: #E2725B;"></i>Санитарное содержание МОП</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Региональная программа капитального ремонта -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="fw-normal mb-3" style="color: #E2725B; letter-spacing: 1px;">РЕГИОНАЛЬНАЯ ПРОГРАММА КАПИТАЛЬНОГО РЕМОНТА</h5>
+                    <p class="mb-3">Региональная программа капитального ремонта общего имущества в многоквартирных домах Кемеровской области - Кузбасса</p>
+                    <p class="text-muted mb-4">Срок реализации: с 1 января 2014 по 31 января 2043</p>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Группа видов работ</th>
+                                    <th>Вид работ</th>
+                                    <th>Начало выполнения</th>
+                                    <th>Окончание выполнения</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Иные виды работ (услуг)</td><td>Иные виды работ (услуг)</td><td>2039</td><td>2039</td></tr>
+                                <tr><td>Иные виды работ (услуг)</td><td>Иные виды работ (услуг)</td><td>2034</td><td>2034</td></tr>
+                                <tr><td>Иные виды работ (услуг)</td><td>Иные виды работ (услуг)</td><td>2027</td><td>2029</td></tr>
+                                <tr><td>Иные виды работ (услуг)</td><td>Иные виды работ (услуг)</td><td>2033</td><td>2035</td></tr>
+                                <tr><td>Иные виды работ (услуг)</td><td>Иные виды работ (услуг)</td><td>2039</td><td>2041</td></tr>
+                                <tr><td>Иные виды работ (услуг)</td><td>Иные виды работ (услуг)</td><td>2029</td><td>2029</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <!-- Поставщики коммунальных ресурсов -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <h5 class="fw-normal mb-3" style="color: #E2725B; letter-spacing: 1px;">ПОСТАВЩИКИ КОММУНАЛЬНЫХ РЕСУРСОВ</h5>
+
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <a href="https://my-gkh.ru/getorganization/oao-kuzneckaya-tec" target="_blank" class="supplier-link">
+                            <i class="bi bi-building me-2" style="color: #E2725B;"></i>
+                            АО "КУЗНЕЦКАЯ ТЭЦ"
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <a href="https://my-gkh.ru/getorganization/ooo-vodokanal-kemerovskaya-4217166136" target="_blank" class="supplier-link">
+                            <i class="bi bi-droplet me-2" style="color: #E2725B;"></i>
+                            ООО "ВОДОКАНАЛ"
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <a href="https://my-gkh.ru/getorganization/ooo-energotranzit" target="_blank" class="supplier-link">
+                            <i class="bi bi-lightning me-2" style="color: #E2725B;"></i>
+                            ООО "ЭНЕРГОТРАНЗИТ"
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <a href="https://my-gkh.ru/getorganization/pao-kuzbassenergosbyt" target="_blank" class="supplier-link">
+                            <i class="bi bi-calculator me-2" style="color: #E2725B;"></i>
+                            ПАО "КУЗБАССЭНЕРГОСБЫТ"
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.supplier-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #333 !important;
+    padding: 5px 0;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.supplier-link:hover {
+    color: #E2725B !important;
+    transform: translateY(-2px);
+    border-bottom-color: #E2725B;
+}
+
+.supplier-link i {
+    transition: all 0.2s ease;
+}
+
+.supplier-link:hover i {
+    color: #E2725B !important;
+}
+</style>
+
+    <!-- Финансовые показатели - точечный график -->
+<div class="row mt-5">
+    <div class="col-12">
+        <h5 class="fw-normal mb-5 text-center" style="color: #E2725B; letter-spacing: 2px;">ФИНАНСОВЫЕ ПОКАЗАТЕЛИ 2016-2024</h5>
+
+        <div class="row">
+            <!-- Выручка -->
+            <div class="col-md-6 mb-5">
+                <p class="text-muted small mb-4 text-center">ВЫРУЧКА (МЛН ₽)</p>
+                <div style="position: relative; height: 250px; padding: 10px;">
+                    <svg viewBox="0 0 500 220" style="width: 100%; height: 100%;">
+                        <!-- Оси -->
+                        <line x1="40" y1="200" x2="460" y2="200" stroke="#dee2e6" stroke-width="1"/>
+                        <line x1="40" y1="20" x2="40" y2="200" stroke="#dee2e6" stroke-width="1"/>
+
+                        <!-- Линия, соединяющая точки -->
+                        <polyline points="
+                            70,180
+                            110,160
+                            150,140
+                            190,120
+                            230,100
+                            270,120
+                            310,100
+                            350,80
+                            390,60"
+                            stroke="#E2725B" stroke-width="2.5" fill="none"/>
+
+                        <!-- Точки данных -->
+                        <circle cx="70" cy="180" r="6" fill="#E2725B"/>
+                        <circle cx="110" cy="160" r="6" fill="#E2725B"/>
+                        <circle cx="150" cy="140" r="6" fill="#E2725B"/>
+                        <circle cx="190" cy="120" r="6" fill="#E2725B"/>
+                        <circle cx="230" cy="100" r="6" fill="#E2725B"/>
+                        <circle cx="270" cy="120" r="6" fill="#E2725B"/>
+                        <circle cx="310" cy="100" r="6" fill="#E2725B"/>
+                        <circle cx="350" cy="80" r="6" fill="#E2725B"/>
+                        <circle cx="390" cy="60" r="6" fill="#E2725B"/>
+
+                        <!-- Годы -->
+                        <text x="70" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2016</text>
+                        <text x="110" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2017</text>
+                        <text x="150" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2018</text>
+                        <text x="190" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2019</text>
+                        <text x="230" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2020</text>
+                        <text x="270" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2021</text>
+                        <text x="310" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2022</text>
+                        <text x="350" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2023</text>
+                        <text x="390" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2024</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Чистая прибыль -->
+            <div class="col-md-6 mb-5">
+                <p class="text-muted small mb-4 text-center">ЧИСТАЯ ПРИБЫЛЬ (МЛН ₽)</p>
+                <div style="position: relative; height: 250px; padding: 10px;">
+                    <svg viewBox="0 0 500 220" style="width: 100%; height: 100%;">
+                        <!-- Оси -->
+                        <line x1="40" y1="200" x2="460" y2="200" stroke="#dee2e6" stroke-width="1"/>
+                        <line x1="40" y1="20" x2="40" y2="200" stroke="#dee2e6" stroke-width="1"/>
+
+                        <!-- Линия, соединяющая точки -->
+                        <polyline points="
+                            70,150
+                            110,135
+                            150,120
+                            190,105
+                            230,190
+                            270,165
+                            310,140
+                            350,115
+                            390,90"
+                            stroke="#E2725B" stroke-width="2.5" fill="none"/>
+
+                        <!-- Точки данных -->
+                        <circle cx="70" cy="150" r="6" fill="#E2725B"/>
+                        <circle cx="110" cy="135" r="6" fill="#E2725B"/>
+                        <circle cx="150" cy="120" r="6" fill="#E2725B"/>
+                        <circle cx="190" cy="105" r="6" fill="#E2725B"/>
+                        <circle cx="230" cy="190" r="6" fill="#E2725B"/>
+                        <circle cx="270" cy="165" r="6" fill="#E2725B"/>
+                        <circle cx="310" cy="140" r="6" fill="#E2725B"/>
+                        <circle cx="350" cy="115" r="6" fill="#E2725B"/>
+                        <circle cx="390" cy="90" r="6" fill="#E2725B"/>
+
+                        <!-- Годы -->
+                        <text x="70" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2016</text>
+                        <text x="110" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2017</text>
+                        <text x="150" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2018</text>
+                        <text x="190" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2019</text>
+                        <text x="230" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2020</text>
+                        <text x="270" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2021</text>
+                        <text x="310" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2022</text>
+                        <text x="350" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2023</text>
+                        <text x="390" y="220" text-anchor="middle" style="font-size: 11px; fill: #999;">2024</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Легенда -->
+        <div class="d-flex justify-content-center mt-3">
+            <div class="d-flex align-items-center me-4">
+                <div style="width: 30px; height: 2px; background: #E2725B; margin-right: 8px;"></div>
+                <span class="text-muted small">Динамика показателя</span>
+            </div>
+            <div class="d-flex align-items-center">
+                <div style="width: 12px; height: 12px; border-radius: 50%; background: #E2725B; margin-right: 8px;"></div>
+                <span class="text-muted small">Годовые значения</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Нижний колонтитул с сотрудниками -->
+    <div class="row mt-5 pt-4" style="border-top: 1px solid #f0f0f0;">
+        <div class="col-12">
+            <div class="d-flex justify-content-center gap-5">
+                <div class="text-center">
+                    <div class="h4 fw-light mb-1" style="color: #E2725B;">63</div>
+                    <div class="small text-muted">Всего сотрудников</div>
+                </div>
+                <div class="text-center">
+                    <div class="h4 fw-light mb-1" style="color: #E2725B;">11</div>
+                    <div class="small text-muted">Административный персонал</div>
+                </div>
+                <div class="text-center">
+                    <div class="h4 fw-light mb-1" style="color: #E2725B;">4</div>
+                    <div class="small text-muted">Инженеры</div>
+                </div>
+                <div class="text-center">
+                    <div class="h4 fw-light mb-1" style="color: #E2725B;">48</div>
+                    <div class="small text-muted">Рабочих</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .tracking-wide {
+        letter-spacing: 1px;
+    }
+    .fw-light {
+        font-weight: 300;
+    }
+</style>
+{% endblock %}

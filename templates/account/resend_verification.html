@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Повторная отправка подтверждения{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h3><i class="bi bi-envelope-arrow-up me-2"></i>Повторная отправка подтверждения</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-4">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" 
+                                   id="email" placeholder="Введите ваш email" required>
+                            <div class="form-text">Укажите email, который вы использовали при регистрации</div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-send me-2"></i>Отправить письмо повторно
+                            </button>
+                            <a href="{% url 'account_login' %}" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Вернуться ко входу
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+[
+  {
+    "email": "nikita@yandex.ru",
+    "full_name": "Булатов Никита Серж",
+    "password": "pbkdf2_sha256$1200000$pg69MbTLhXAghmd9jaYHxe$1BIqi4GNYfCvqU3KdU9sEvh933DmuPYuuzWfCNlDWFM=",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "date_joined": "2026-02-05T12:05:35.243664+00:00"
+  },
+  {
+    "email": "ke123l@yandex.ru",
+    "full_name": "Булатова Диана ЧАН",
+    "password": "pbkdf2_sha256$1200000$sLqeoxd74lY0mQojbssXWo$i+loYxrNKH53fcTMGxkL1enmawZmpT1RtXQpaiaRwaY=",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "date_joined": "2026-02-05T11:58:29.843910+00:00"
+  },
+  {
+    "email": "kel@yandex.ru",
+    "full_name": "Булатова Диана Юрьевна",
+    "password": "pbkdf2_sha256$1200000$VuJolWzoXDbSsEqdsA4WCt$tKRrYbXYeV9VExT+cKTjiP0e5z0se+ZuXpfcrZjjli0=",
+    "is_active": true,
+    "is_staff": false,
+    "is_superuser": false,
+    "date_joined": "2026-02-05T11:51:12.694940+00:00"
+  },
+  {
+    "email": "nikita.bulatov777@mail.ru",
+    "full_name": "Администратор УК",
+    "password": "pbkdf2_sha256$1200000$zed0Lbi5QnT0NM2uJFPHa9$P3tYI467FAs9/OiYLZ4tw4WI0i3oN3zW5TQ8+kHVt48=",
+    "is_active": true,
+    "is_staff": true,
+    "is_superuser": true,
+    "date_joined": "2026-02-03T06:35:21.662290+00:00"
+  }
+]

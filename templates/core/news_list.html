@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Новости - УК "Новый город"{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-5" style="color: #E2725B;">Новости и объявления</h1>
+
+    <div class="row">
+        {% for news in news_list %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm news-card">
+                {% if news.image %}
+                <img src="{{ news.image.url }}" class="card-img-top" alt="{{ news.title }}" style="height: 200px; object-fit: cover;">
+                {% else %}
+                <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                    <i class="bi bi-newspaper" style="font-size: 4rem; color: #E2725B;"></i>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge" style="background-color: #E2725B;">
+                            <i class="bi bi-calendar3 me-1"></i>{{ news.created_at|date:"d.m.Y" }}
+                        </span>
+                    </div>
+                    <h5 class="card-title fw-bold mb-3">{{ news.title }}</h5>
+                    <p class="card-text text-muted">{{ news.short_description|truncatechars:100 }}</p>
+                    <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#newsModal{{ news.id }}">
+                        <i class="bi bi-eye me-2"></i>Читать подробнее
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно -->
+        <div class="modal fade" id="newsModal{{ news.id }}" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header" style="background: linear-gradient(135deg, #E2725B 0%, #CC5A4F 100%); color: white;">
+                        <h5 class="modal-title fw-bold">{{ news.title }}</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% if news.image %}
+                        <div class="text-center mb-4">
+                            <img src="{{ news.image.url }}" class="img-fluid rounded" alt="{{ news.title }}" style="max-height: 300px;">
+                        </div>
+                        {% endif %}
+
+                        <div class="d-flex align-items-center mb-3 text-muted">
+                            <i class="bi bi-calendar3 me-2"></i>
+                            <span>{{ news.created_at|date:"d E Y H:i" }}</span>
+                        </div>
+
+                        <!-- Краткое описание -->
+                        {% if news.short_description %}
+                        <div class="mb-4 p-3" style="background-color: #f8f9fa; border-left: 4px solid #E2725B;">
+                            <p class="mb-0 fst-italic text-secondary">{{ news.short_description }}</p>
+                        </div>
+                        {% endif %}
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="bi bi-x-lg me-2"></i>Закрыть
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <i class="bi bi-newspaper" style="font-size: 5rem; color: #dee2e6;"></i>
+            <h3 class="mt-3 text-muted">Новостей пока нет</h3>
+            <p class="text-muted">Следите за обновлениями</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Пагинация -->
+    {% if is_paginated %}
+    <nav class="mt-5">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous" style="color: #E2725B;">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <li class="page-item active">
+                    <span class="page-link" style="background-color: #E2725B; border-color: #E2725B;">{{ num }}</span>
+                </li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ num }}" style="color: #E2725B;">{{ num }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next" style="color: #E2725B;">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+<style>
+.news-card {
+    transition: all 0.3s ease;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(226, 114, 91, 0.2);
+    border-color: #E2725B;
+}
+
+.news-card .card-img-top {
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.news-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.news-content p {
+    margin-bottom: 1.5rem;
+}
+
+.pagination .page-link {
+    border: none;
+    margin: 0 3px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.pagination .page-link:hover {
+    background-color: #E2725B;
+    color: white !important;
+}
+
+.pagination .active .page-link {
+    box-shadow: 0 5px 15px rgba(226, 114, 91, 0.3);
+}
+
+.modal-content {
+    border-radius: 15px;
+    border: none;
+}
+
+.modal-header {
+    border-radius: 15px 15px 0 0;
+    padding: 1.2rem 1.5rem;
+}
+
+.modal-header .btn-close {
+    filter: brightness(0) invert(1);
+}
+</style>
+{% endblock %}

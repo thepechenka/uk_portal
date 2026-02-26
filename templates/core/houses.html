@@ -1,0 +1,433 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Наши дома - УК "Новый город"{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+
+    <!-- Красивая цитата о городе -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="text-center py-5" style="border-top: 2px solid #E2725B; border-bottom: 2px solid #E2725B;">
+                <p class="display-6 fw-light px-3" style="color: #555; max-width: 900px; margin: 0 auto;">
+                    «Новокузнецк — город, в котором хочется жить и строить будущее»
+                </p>
+                <div class="mt-4">
+                    <span class="badge rounded-pill px-4 py-2" style="background: #E2725B; color: white; font-weight: 300; font-size: 1rem;">
+                        УК "Новый город"
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Большая карта -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-header" style="background: linear-gradient(135deg, #E2725B 0%, #CC5A4F 100%); color: white;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="bi bi-map me-2"></i>Карта расположения домов</h5>
+                        <button class="btn btn-light btn-sm" id="showAllHousesBtn">
+                            <i class="bi bi-globe me-1"></i>Показать все дома
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div id="map" style="height: 500px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Статистика -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="stat-card p-3">
+                                <h2 class="display-4 fw-bold" style="color: #E2725B;" id="totalHouses">0</h2>
+                                <p class="mb-0">жилых домов</p>
+                                <small class="text-muted">в управлении</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="stat-card p-3">
+                                <h2 class="display-4 fw-bold" style="color: #E2725B;" id="totalApartments">0</h2>
+                                <p class="mb-0">квартир</p>
+                                <small class="text-muted">обслуживаем</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="stat-card p-3">
+                                <h2 class="display-4 fw-bold" style="color: #E2725B;">25+</h2>
+                                <p class="mb-0">лет опыта</p>
+                                <small class="text-muted">на рынке</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="stat-card p-3">
+                                <h2 class="display-4 fw-bold" style="color: #E2725B;">99%</h2>
+                                <p class="mb-0">довольных жителей</p>
+                                <small class="text-muted">по отзывам</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Блоки с домами -->
+    <h2 class="text-center mb-4" style="color: #E2725B;">Наши жилые дома</h2>
+    <p class="text-center text-muted mb-5">Выберите дом для просмотра подробной информации</p>
+    <div id="housesContainer" class="row">
+        <div class="col-12 text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Загрузка...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно -->
+<div class="modal fade" id="houseModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(135deg, #E2725B 0%, #CC5A4F 100%); color: white;">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Яндекс.Карты -->
+<script src="https://api-maps.yandex.ru/2.1/?apikey=309e23b8-6ae5-4e88-afdc-e3dfcd9c3235&lang=ru_RU"></script>
+
+<script>
+let mainMap;
+let mainPlacemarks = {};
+let housesData = [];
+
+// Загрузка домов из API
+async function loadHouses() {
+    try {
+        const response = await fetch('/api/houses/');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        housesData = await response.json();
+
+        document.getElementById('totalHouses').textContent = housesData.length;
+        const totalApartments = housesData.reduce((sum, house) => sum + (house.apartments_count || 0), 0);
+        document.getElementById('totalApartments').textContent = totalApartments.toLocaleString();
+
+        renderHouses();
+        if (mainMap) addMarkersToMap();
+
+    } catch (error) {
+        document.getElementById('housesContainer').innerHTML = `
+            <div class="col-12 text-center text-danger">
+                <p>Ошибка загрузки данных. Пожалуйста, обновите страницу.</p>
+            </div>
+        `;
+    }
+}
+
+// Генерация карточек домов
+function renderHouses() {
+    const container = document.getElementById('housesContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (housesData.length === 0) {
+        container.innerHTML = `<div class="col-12 text-center"><p class="text-muted">Нет добавленных домов</p></div>`;
+        return;
+    }
+
+    housesData.forEach(house => {
+        const card = document.createElement('div');
+        card.className = 'col-md-6 col-lg-4 mb-4';
+        card.innerHTML = `
+            <div class="card h-100 shadow-sm house-card" data-house-id="${house.id}">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #E2725B;">${house.address}</h5>
+                    <div class="mini-map mb-3" id="miniMap${house.id}" style="height: 150px; border-radius: 8px; overflow: hidden;"></div>
+                    <div class="row">
+                        <div class="col-6"><p class="mb-1"><small class="text-muted">Год постройки:</small></p><p class="fw-bold">${house.built_year || 'н/д'}</p></div>
+                        <div class="col-6"><p class="mb-1"><small class="text-muted">Этажность:</small></p><p class="fw-bold">${house.floor_count || 'н/д'} этажей</p></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6"><p class="mb-1"><small class="text-muted">Квартиры:</small></p><p class="fw-bold">${house.apartments_count || 'н/д'}</p></div>
+                        <div class="col-6"><p class="mb-1"><small class="text-muted">Подъезды:</small></p><p class="fw-bold">${house.entrance_count || 'н/д'}</p></div>
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn btn-outline-primary btn-sm btn-show-details" data-house-id="${house.id}">
+                            <i class="bi bi-info-circle me-1"></i>Подробные характеристики
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+    setTimeout(createMiniMaps, 500);
+}
+
+// Создание мини-карт
+function createMiniMaps() {
+    housesData.forEach(house => {
+        if (!house.coords) return;
+        const mapContainer = document.getElementById(`miniMap${house.id}`);
+        if (!mapContainer) return;
+        try {
+            new ymaps.Map(mapContainer, {
+                center: house.coords,
+                zoom: 16,
+                controls: []
+            }).geoObjects.add(new ymaps.Placemark(house.coords, {}, {
+                preset: 'islands#circleDotIcon',
+                iconColor: '#E2725B'
+            }));
+        } catch (e) {}
+    });
+}
+
+// Добавление меток на карту
+function addMarkersToMap() {
+    housesData.forEach(house => {
+        if (!house.coords) return;
+        const placemark = new ymaps.Placemark(
+            house.coords,
+            {
+                balloonContent: `
+                    <div style="padding: 10px;">
+                        <h6 style="margin: 0 0 10px; color: #E2725B;">${house.address}</h6>
+                        <div><small>Год:</small> <strong>${house.built_year || 'н/д'}</strong></div>
+                        <div><small>Этажей:</small> <strong>${house.floor_count || 'н/д'}</strong></div>
+                        <div><small>Квартир:</small> <strong>${house.apartments_count || 'н/д'}</strong></div>
+                        <button class="btn btn-sm btn-primary mt-2 w-100" onclick="showHouseDetails(${house.id})">Подробнее</button>
+                    </div>
+                `,
+                hintContent: house.address
+            },
+            { preset: 'islands#circleIcon', iconColor: '#E2725B' }
+        );
+        mainMap.geoObjects.add(placemark);
+        mainPlacemarks[house.id] = placemark;
+    });
+}
+
+// Показать все дома
+function showAllHouses() {
+    if (!mainMap) return;
+    const bounds = mainMap.geoObjects.getBounds();
+    if (bounds) mainMap.setBounds(bounds, { checkZoomRange: true, zoomMargin: 50 });
+    document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Открыть модалку
+function showHouseDetails(houseId) {
+    const house = housesData.find(h => h.id == houseId);
+    if (!house) return;
+
+    let reportsHtml = '';
+    if (house.reports?.length) {
+        reportsHtml = `
+            <div class="details-section">
+                <h6>ГОДОВЫЕ ОТЧЕТЫ</h6>
+                <div class="reports-grid">
+                    ${house.reports.map(report => `
+                        <a href="${report.file_url}" target="_blank" class="report-item">
+                            <i class="bi bi-file-pdf"></i>
+                            <span class="report-year">${report.year}</span>
+                        </a>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    document.getElementById('modalTitle').innerText = `${house.address} - Характеристики дома`;
+    document.getElementById('modalBody').innerHTML = `
+        <style>
+            .house-details { padding: 5px; }
+            .details-section { margin-bottom: 20px; }
+            .details-section h6 {
+                color: #E2725B;
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 12px;
+                padding-bottom: 4px;
+                border-bottom: 2px solid #E2725B;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            .details-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px 20px;
+            }
+            .detail-item { display: flex; flex-direction: column; }
+            .detail-label { color: #666; font-size: 13px; margin-bottom: 2px; }
+            .detail-value { font-weight: 600; font-size: 16px; color: #333; }
+
+            .reports-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-top: 10px;
+            }
+            .report-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 70px;
+                height: 70px;
+                background: #f8f9fa;
+                border-radius: 8px;
+                text-decoration: none;
+                color: #333;
+                border: 1px solid #dee2e6;
+                transition: all 0.3s ease;
+                font-weight: 600;
+            }
+            .report-item i {
+                color: #E2725B;
+                font-size: 1.5rem;
+                margin-bottom: 2px;
+            }
+            .report-item:hover {
+                background: #E2725B !important;
+                color: white !important;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(226, 114, 91, 0.3);
+            }
+            .report-item:hover i { color: white !important; }
+            .report-year { font-size: 0.9rem; }
+
+            @media (max-width: 500px) {
+                .details-grid { grid-template-columns: 1fr; gap: 10px; }
+            }
+        </style>
+
+        <div class="house-details">
+            <div class="details-section">
+                <h6>ОСНОВНАЯ ИНФОРМАЦИЯ</h6>
+                <div class="details-grid">
+                    <div class="detail-item"><span class="detail-label">Год постройки</span><span class="detail-value">${house.built_year || 'н/д'}</span></div>
+                    <div class="detail-item"><span class="detail-label">Этажность</span><span class="detail-value">${house.floor_count || 'н/д'}</span></div>
+                    <div class="detail-item"><span class="detail-label">Тип дома</span><span class="detail-value">${house.house_type || 'н/д'}</span></div>
+                    <div class="detail-item"><span class="detail-label">Парадных</span><span class="detail-value">${house.entrance_count || 'н/д'}</span></div>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <h6>ХАРАКТЕРИСТИКИ</h6>
+                <div class="details-grid">
+                    <div class="detail-item"><span class="detail-label">Тип перекрытий</span><span class="detail-value">${house.ceiling_type || 'н/д'}</span></div>
+                    <div class="detail-item"><span class="detail-label">Квартир</span><span class="detail-value">${house.apartments_count || 'н/д'}</span></div>
+                    <div class="detail-item"><span class="detail-label">Высота потолков</span><span class="detail-value">${house.ceiling_height ? house.ceiling_height + ' м' : 'н/д'}</span></div>
+                    <div class="detail-item"><span class="detail-label">Лифтов</span><span class="detail-value">${house.elevator_count || 'н/д'}</span></div>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <h6>КОММУНИКАЦИИ И СОСТОЯНИЕ</h6>
+                <div class="details-grid">
+                    <div class="detail-item"><span class="detail-label">Газ</span><span class="detail-value">${house.has_gas ? 'Да' : 'Нет'}</span></div>
+                    <div class="detail-item"><span class="detail-label">Мусоропровод</span><span class="detail-value">${house.has_garbage_chute ? 'Да' : 'Нет'}</span></div>
+                    <div class="detail-item"><span class="detail-label">Отопление</span><span class="detail-value">${house.heating_type || 'н/д'}</span></div>
+                    <div class="detail-item"><span class="detail-label">Аварийность</span><span class="detail-value">${house.is_emergency ? 'Да' : 'Нет'}</span></div>
+                    <div class="detail-item"><span class="detail-label">Под снос</span><span class="detail-value">${house.is_demolition ? 'Да' : 'Нет'}</span></div>
+                </div>
+            </div>
+
+            ${reportsHtml}
+        </div>
+    `;
+    new bootstrap.Modal(document.getElementById('houseModal')).show();
+}
+
+// Инициализация карты
+ymaps.ready(function() {
+    mainMap = new ymaps.Map('map', {
+        center: [53.757, 87.12],
+        zoom: 12,
+        controls: ['zoomControl', 'fullscreenControl']
+    });
+    loadHouses();
+});
+
+// Обработчики
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('showAllHousesBtn')?.addEventListener('click', showAllHouses);
+
+    document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.btn-show-details');
+        if (btn) showHouseDetails(btn.getAttribute('data-house-id'));
+    });
+
+    new MutationObserver(() => {
+        document.querySelectorAll('.house-card').forEach(card => {
+            const houseId = card.getAttribute('data-house-id');
+            card.addEventListener('mouseenter', () => {
+                mainPlacemarks[houseId]?.options.set('iconColor', '#ff4444');
+                card.style.transform = 'translateY(-5px)';
+                card.style.boxShadow = '0 10px 20px rgba(226, 114, 91, 0.3)';
+            });
+            card.addEventListener('mouseleave', () => {
+                mainPlacemarks[houseId]?.options.set('iconColor', '#E2725B');
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '';
+            });
+        });
+    }).observe(document.getElementById('housesContainer'), { childList: true, subtree: true });
+});
+</script>
+
+<style>
+.stat-card {
+    border-radius: 10px;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+.stat-card:hover {
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+.mini-map {
+    cursor: default;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.mini-map:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.house-card {
+    transition: all 0.3s ease;
+    border: 1px solid #dee2e6;
+}
+.house-card:hover {
+    border-color: #E2725B;
+}
+.btn-show-details:hover {
+    color: #E2725B;
+    border-color: #E2725B;
+    transform: translateY(-2px);
+}
+@media (max-width: 768px) {
+    .stat-card h2 { font-size: 2rem; }
+}
+</style>
+
+{% endblock %}

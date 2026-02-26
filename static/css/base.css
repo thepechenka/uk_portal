@@ -1,0 +1,80 @@
+:root {
+    --primary-color: #E2725B;
+    --primary-dark: #CC5A4F;
+    --gradient: linear-gradient(135deg, #E2725B 0%, #CC5A4F 100%);
+    --text-muted: #6c757d;
+    --border-color: #f0f0f0;
+    --bg-light: #f8f9fa;
+    --bg-dark: #343a40;
+}
+
+/* Базовые стили */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+main {
+    flex: 1 0 auto;
+    padding-bottom: 2rem;
+}
+
+/* Типографика */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-primary {
+    background: var(--gradient) !important;
+}
+
+/* Кнопки */
+.btn-primary {
+    background: var(--gradient) !important;
+    border: none !important;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(226, 114, 91, 0.3);
+}
+
+/* Анимации */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.fade-in-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Утилиты */
+.tracking-wide {
+    letter-spacing: 1px;
+}
+
+.fw-light {
+    font-weight: 300;
+}
+
+/* Стили для ссылок */
+a {
+    transition: opacity 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.8;
+}

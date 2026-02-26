@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h3><i class="bi bi-person-plus me-2"></i>Регистрация на портале</h3>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Показываем сообщения об ошибках -->
+                    {% if messages %}
+                    <div class="alert alert-danger">
+                        {% for message in messages %}
+                        {{ message }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- ИСПРАВЛЕНО: добавил action -->
+                            <form method="post" action="{% url 'register' %}">
+                                {% csrf_token %}
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email адрес*</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                               placeholder="example@mail.ru" value="{{ request.POST.email }}" required>
+                                    </div>
+                                    <div class="form-text">Будет использоваться для входа</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="full_name" class="form-label">ФИО*</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                        <input type="text" class="form-control" id="full_name" name="full_name"
+                                               placeholder="Иванов Иван Иванович" value="{{ request.POST.full_name }}" required>
+                                    </div>
+                                    <div class="form-text">Как указано в паспорте</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password1" class="form-label">Пароль*</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                        <input type="password" class="form-control" id="password1" name="password1"
+                                               placeholder="Минимум 8 символов" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="password2" class="form-label">Подтверждение пароля*</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                        <input type="password" class="form-control" id="password2" name="password2"
+                                               placeholder="Повторите пароль" required>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="bi bi-person-plus me-2"></i>Зарегистрироваться
+                                    </button>
+                                </div>
+
+                                <div class="text-center mt-3">
+                                    <p>Уже есть аккаунт? <a href="{% url 'account_login' %}" class="text-primary">Войти</a></p>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="p-3">
+                                <h5 class="text-primary mb-3">Преимущества регистрации:</h5>
+                                <ul class="list-unstyled">
+                                    <li class="mb-3">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <strong>Быстрая подача заявок</strong>
+                                        <p class="text-muted small">Создавайте заявки в несколько кликов</p>
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <strong>Отслеживание статуса</strong>
+                                        <p class="text-muted small">Следите за выполнением ваших заявок</p>
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <strong>Новости и объявления</strong>
+                                        <p class="text-muted small">Будьте в курсе событий вашего дома</p>
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <strong>Онлайн-чат с УК</strong>
+                                        <p class="text-muted small">Получайте быстрые ответы на вопросы</p>
+                                    </li>
+                                </ul>
+
+                                <div class="alert alert-info mt-4">
+                                    <i class="bi bi-info-circle me-2"></i>
+                                    <small>После регистрации вам будет необходимо привязать квартиру по лицевому счету</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

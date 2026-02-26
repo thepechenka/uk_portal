@@ -1,0 +1,68 @@
+{% extends "base.html" %}  <!-- Используй КОРНЕВОЙ base.html -->
+{% load i18n %}
+
+{% block title %}Вход | УК "Новый город"{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <div class="card-header text-white text-center py-4" style="background: var(--gradient) !important; border-radius: 12px 12px 0 0 !important;">
+                    <h3 class="mb-0">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Вход в личный кабинет
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            Неверный email или пароль. Попробуйте снова.
+                        </div>
+                    {% endif %}
+
+                    <form method="post" action="{% url 'account_login' %}">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="id_login" class="form-label fw-bold">Email *</label>
+                            <input type="email" name="login" class="form-control"
+                                   id="id_login" placeholder="example@mail.ru" required autofocus>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_password" class="form-label fw-bold">Пароль *</label>
+                            <input type="password" name="password" class="form-control"
+                                   id="id_password" placeholder="Введите пароль" required>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" name="remember" class="form-check-input" id="id_remember">
+                            <label class="form-check-label" for="id_remember">Запомнить меня</label>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg py-3">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Войти
+                            </button>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <p>
+                                <a href="{% url 'account_reset_password' %}" style="color: var(--primary-color);">
+                                    Забыли пароль?
+                                </a>
+                            </p>
+                            <p>
+                                Нет аккаунта?
+                                <a href="{% url 'register' %}" style="color: var(--primary-color); font-weight: bold;">
+                                    Зарегистрироваться
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

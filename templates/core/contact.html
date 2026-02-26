@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Контакты - УК "Новый город"{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Заголовок -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold" style="color: #E2725B;">Контакты</h1>
+        <p class="lead text-muted">Как с нами связаться</p>
+    </div>
+
+    <!-- Две колонки -->
+    <div class="row">
+        <!-- Левая колонка - контактная информация -->
+        <div class="col-lg-6 mb-4">
+            <div class="pe-lg-4">
+                <h5 class="fw-normal mb-4" style="color: #E2725B; letter-spacing: 1px;">КОНТАКТНАЯ ИНФОРМАЦИЯ</h5>
+
+                <div class="mb-4 pb-2" style="border-bottom: 1px solid #f0f0f0;">
+                    <div class="row">
+                        <div class="col-4 text-muted small">Адрес</div>
+                        <div class="col-8">г. Новокузнецк, ул. Павловского, д. 11А</div>
+                    </div>
+                </div>
+
+                <div class="mb-4 pb-2" style="border-bottom: 1px solid #f0f0f0;">
+                    <div class="row">
+                        <div class="col-4 text-muted small">Телефон</div>
+                        <div class="col-8">+7 3843 20-02-82</div>
+                    </div>
+                </div>
+
+                <div class="mb-4 pb-2" style="border-bottom: 1px solid #f0f0f0;">
+                    <div class="row">
+                        <div class="col-4 text-muted small">Диспетчерская</div>
+                        <div class="col-8">+7 3843 92-62-26 (круглосуточно)</div>
+                    </div>
+                </div>
+
+                <div class="mb-4 pb-2" style="border-bottom: 1px solid #f0f0f0;">
+                    <div class="row">
+                        <div class="col-4 text-muted small">Email</div>
+                        <div class="col-8">novyjgorod@mail.ru</div>
+                    </div>
+                </div>
+
+                <div class="mb-4 pb-2" style="border-bottom: 1px solid #f0f0f0;">
+                    <div class="row">
+                        <div class="col-4 text-muted small">Сайт</div>
+                        <div class="col-8">uk-novygorod.ru</div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="row">
+                        <div class="col-4 text-muted small">ИНН/КПП</div>
+                        <div class="col-8">4217175437 / 421701001</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Правая колонка - режим работы -->
+        <div class="col-lg-6 mb-4">
+            <div class="ps-lg-4">
+                <h5 class="fw-normal mb-4" style="color: #E2725B; letter-spacing: 1px;">РЕЖИМ РАБОТЫ</h5>
+
+                <div class="mb-4 pb-2" style="border-bottom: 1px solid #f0f0f0;">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Понедельник - Четверг</span>
+                        <span>9:00 - 17:00</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Пятница</span>
+                        <span>9:00 - 15:00</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Суббота, Воскресенье</span>
+                        <span class="text-muted">выходной</span>
+                    </div>
+                    <div class="text-muted small mt-2">Перерыв 12:00 - 13:00</div>
+                </div>
+
+                <h5 class="fw-normal mb-4 mt-5" style="color: #E2725B; letter-spacing: 1px;">ПРИЕМ ГРАЖДАН</h5>
+
+                <div class="mb-4 pb-2" style="border-bottom: 1px solid #f0f0f0;">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Понедельник</span>
+                        <span>14:00 - 16:30</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Вторник</span>
+                        <span>8:30 - 16:30</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Четверг</span>
+                        <span>8:30 - 16:30</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Пятница</span>
+                        <span>14:00 - 16:00</span>
+                    </div>
+                    <div class="text-muted small mt-2">Вторник и четверг: перерыв 12:00 - 13:00</div>
+                </div>
+
+                <h5 class="fw-normal mb-4 mt-5" style="color: #E2725B; letter-spacing: 1px;">ДИСПЕТЧЕРСКАЯ СЛУЖБА</h5>
+
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Ежедневно</span>
+                        <span>круглосуточно</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span class="text-muted">Телефон</span>
+                        <span>+7 3843 92-62-26</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Карта с API -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h5 class="fw-normal mb-4" style="color: #E2725B; letter-spacing: 1px;">СХЕМА ПРОЕЗДА</h5>
+            <div class="mb-5">
+                <div id="contact-map" style="width: 100%; height: 350px; border-radius: 12px;"></div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Быстрые контакты -->
+    <div class="row mt-5 pt-4" style="border-top: 1px solid #f0f0f0;">
+        <div class="col-12">
+            <div class="d-flex justify-content-center">
+                <!-- Email -->
+                <a href="https://e.mail.ru/compose/?to=novyjgorod@mail.ru" class="text-decoration-none" style="width: 100px;">
+                    <div class="text-center">
+                        <div class="mb-2"><i class="bi bi-envelope fs-3" style="color: #E2725B;"></i></div>
+                        <div class="small text-muted">Написать</div>
+                    </div>
+                </a>
+
+                <!-- Telegram -->
+                <a href="https://t.me/s/novosti_nk" target="_blank" class="text-decoration-none" style="width: 100px;">
+                    <div class="text-center">
+                        <div class="mb-2"><i class="bi bi-telegram fs-3" style="color: #E2725B;"></i></div>
+                        <div class="small text-muted">Telegram</div>
+                    </div>
+                </a>
+
+                <!-- MAX -->
+                <a href="https://max.ru/" target="_blank" class="text-decoration-none" style="width: 100px;">
+                    <div class="text-center">
+                        <div class="mb-2"><i class="bi bi-chat fs-3" style="color: #E2725B;"></i></div>
+                        <div class="small text-muted">MAX</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Яндекс.Карты API -->
+<script src="https://api-maps.yandex.ru/2.1/?apikey=309e23b8-6ae5-4e88-afdc-e3dfcd9c3235&lang=ru_RU"></script>
+<script>
+    ymaps.ready(function() {
+        var contactMap = new ymaps.Map('contact-map', {
+            center: [53.768544, 87.127878],
+            zoom: 17,
+            controls: ['zoomControl', 'fullscreenControl']
+        });
+
+        var placemark = new ymaps.Placemark([53.768544, 87.127878], {
+            hintContent: 'ООО "Новый город"',
+            balloonContent: '<strong>УК "Новый город"</strong><br>ул. Павловского, 11А<br>+7 3843 20-02-82'
+        }, {
+            preset: 'islands#circleIcon',
+            iconColor: '#E2725B'
+        });
+
+        contactMap.geoObjects.add(placemark);
+    });
+</script>
+
+<style>
+    a {
+        transition: opacity 0.3s ease;
+    }
+    a:hover {
+        opacity: 0.8;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Создать заявку{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="bi bi-plus-circle me-2"></i>Создание новой заявки</h4>
+                </div>
+                <div class="card-body">
+                    {% if not user.has_apartment %}
+                        <div class="alert alert-warning">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            Для создания заявки необходимо сначала привязать квартиру в 
+                            <a href="{% url 'profile' %}" class="alert-link">личном кабинете</a>.
+                        </div>
+                    {% else %}
+                        <form method="post">
+                            {% csrf_token %}
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Тип заявки</label>
+                                {{ form.request_type }}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Заголовок</label>
+                                {{ form.title }}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Описание проблемы</label>
+                                {{ form.description }}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Приоритет</label>
+                                {{ form.priority }}
+                            </div>
+                            
+                            <div class="alert alert-info">
+                                <i class="bi bi-info-circle me-2"></i>
+                                Заявка будет автоматически привязана к вашей квартире: 
+                                <strong>{{ user.apartment.house.address }}, кв. {{ user.apartment.number }}</strong>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-send me-2"></i>Отправить заявку
+                                </button>
+                                <a href="{% url 'my_requests' %}" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-left me-2"></i>Вернуться к заявкам
+                                </a>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
