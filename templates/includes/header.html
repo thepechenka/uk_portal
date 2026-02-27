@@ -65,12 +65,10 @@
 
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <form method="post" action="{% url 'account_logout' %}" class="d-inline">
-                                    {% csrf_token %}
-                                    <button type="submit" class="dropdown-item dropdown-item-hover">
-                                        <i class="bi bi-box-arrow-right me-2"></i>Выйти
-                                    </button>
-                                </form>
+                                <!-- КНОПКА ВЫХОДА С МОДАЛЬНЫМ ОКНОМ -->
+                                <button type="button" class="dropdown-item dropdown-item-hover" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                                    <i class="bi bi-box-arrow-right me-2"></i>Выйти
+                                </button>
                             </li>
                         </ul>
                     </div>
@@ -83,3 +81,76 @@
         </div>
     </div>
 </nav>
+
+<!-- МОДАЛЬНОЕ ОКНО ПОДТВЕРЖДЕНИЯ ВЫХОДА -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 15px; border: none;">
+            <div class="modal-header" style="background: linear-gradient(135deg, #E2725B 0%, #CC5A4F 100%); border-radius: 15px 15px 0 0;">
+                <h5 class="modal-title text-white" id="logoutModalLabel">
+                    <i class="bi bi-box-arrow-right me-2"></i>Подтверждение выхода
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <div class="mb-3">
+                    <i class="bi bi-question-circle" style="font-size: 4rem; color: #E2725B;"></i>
+                </div>
+                <h4 class="mb-3">Вы уверены?</h4>
+                <p class="text-muted mb-0">Вы действительно хотите выйти из личного кабинета?</p>
+                <p class="text-muted small">Все несохраненные данные будут потеряны.</p>
+            </div>
+            <div class="modal-footer justify-content-center border-0 pb-4">
+                <button type="button" class="btn btn-outline-secondary px-4 py-2" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle me-2"></i>Отмена
+                </button>
+                <form method="post" action="{% url 'account_logout' %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn px-4 py-2" style="background: linear-gradient(135deg, #E2725B 0%, #CC5A4F 100%); border: none; color: white;">
+                        <i class="bi bi-box-arrow-right me-2"></i>Выйти
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Стили для модального окна -->
+<style>
+    .modal-content {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .modal-header {
+        border-bottom: none;
+        padding: 1.5rem;
+    }
+
+    .modal-footer {
+        border-top: none;
+        padding: 1rem 1.5rem 1.5rem;
+    }
+
+    .btn-close-white {
+        filter: brightness(0) invert(1);
+    }
+
+    .modal-backdrop.show {
+        opacity: 0.5;
+    }
+
+    @media (max-width: 576px) {
+        .modal-dialog {
+            margin: 1rem;
+        }
+
+        .modal-body i {
+            font-size: 3rem !important;
+        }
+
+        .modal-body h4 {
+            font-size: 1.25rem;
+        }
+    }
+</style>

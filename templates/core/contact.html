@@ -130,7 +130,7 @@
         <div class="col-12">
             <h5 class="fw-normal mb-4" style="color: #E2725B; letter-spacing: 1px;">СХЕМА ПРОЕЗДА</h5>
             <div class="mb-5">
-                <div id="contact-map"></div>
+                <div id="contact-map" style="width: 100%; height: 350px; border-radius: 12px;"></div>
             </div>
         </div>
     </div>
@@ -138,9 +138,9 @@
     <!-- Быстрые контакты -->
     <div class="row mt-5 pt-4" style="border-top: 1px solid #f0f0f0;">
         <div class="col-12">
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center gap-4">
                 <!-- Email -->
-                <a href="https://e.mail.ru/compose/?to=novyjgorod@mail.ru" class="text-decoration-none contact-link" style="width: 100px;">
+                <a href="https://e.mail.ru/compose/?to=novyjgorod@mail.ru" target="_blank" class="text-decoration-none contact-link">
                     <div class="text-center quick-contact-item">
                         <div class="mb-2"><i class="bi bi-envelope fs-3" style="color: #E2725B;"></i></div>
                         <div class="small text-muted">Написать</div>
@@ -148,7 +148,7 @@
                 </a>
 
                 <!-- Telegram -->
-                <a href="https://t.me/s/novosti_nk" target="_blank" class="text-decoration-none contact-link" style="width: 100px;">
+                <a href="https://t.me/s/novosti_nk" target="_blank" class="text-decoration-none contact-link">
                     <div class="text-center quick-contact-item">
                         <div class="mb-2"><i class="bi bi-telegram fs-3" style="color: #E2725B;"></i></div>
                         <div class="small text-muted">Telegram</div>
@@ -156,7 +156,7 @@
                 </a>
 
                 <!-- MAX -->
-                <a href="https://max.ru/" target="_blank" class="text-decoration-none contact-link" style="width: 100px;">
+                <a href="https://max.ru/" target="_blank" class="text-decoration-none contact-link">
                     <div class="text-center quick-contact-item">
                         <div class="mb-2"><i class="bi bi-chat fs-3" style="color: #E2725B;"></i></div>
                         <div class="small text-muted">MAX</div>
@@ -169,6 +169,6 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=309e23b8-6ae5-4e88-afdc-e3dfcd9c3235&lang=ru_RU"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_апи_ключ&lang=ru_RU"></script>
     <script src="{% static 'js/contact.js' %}"></script>
 {% endblock %}
