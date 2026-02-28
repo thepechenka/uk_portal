@@ -8,6 +8,11 @@ from django.views.decorators.http import require_GET
 from .models import News, Request, Comment, House
 from .forms import RequestForm, CommentForm
 from accounts.decorators import apartment_required
+from accounts.views import send_request_email_notification  # ИМПОРТИРУЕМ ФУНКЦИЮ
+
+
+import logging
+logger = logging.getLogger(__name__)
 
 
 def get_user_context(user):
@@ -45,6 +50,14 @@ def request_create_view(request):
             request_obj.user = request.user
             request_obj.apartment = request.user.apartment
             request_obj.save()
+
+            # ОТПРАВКА УВЕДОМЛЕНИЯ НА ПОЧТУ
+            try:
+                send_request_email_notification(request_obj)
+                logger.info(f"Уведомление о заявке #{request_obj.id} отправлено")
+            except Exception as e:
+                logger.error(f"Ошибка отправки уведомления: {e}")
+
             messages.success(request, 'Заявка успешно создана!')
             return redirect('my_requests')
         else:

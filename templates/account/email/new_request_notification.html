@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Новая заявка #{{ request.id }}</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f4f4f4;">
+    <div style="max-width: 600px; margin: 20px auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #E2725B 0%, #CC5A4F 100%); color: white; padding: 30px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">УК "Новый город"</h1>
+            <p style="margin: 10px 0 0 0; opacity: 0.9;">Новая заявка #{{ request.id }}</p>
+        </div>
+
+        <!-- Content -->
+        <div style="padding: 30px;">
+            <h2 style="color: #E2725B; margin-top: 0;">Здравствуйте, {{ user.full_name }}!</h2>
+
+            <p>Ваша заявка успешно создана и передана в работу.</p>
+
+            <div style="background: #f8f9fa; border-left: 4px solid #E2725B; padding: 15px; margin: 20px 0; border-radius: 5px;">
+                <p style="margin: 5px 0;"><strong>Тип:</strong> {{ request.get_request_type_display }}</p>
+                <p style="margin: 5px 0;"><strong>Заголовок:</strong> {{ request.title }}</p>
+                <p style="margin: 5px 0;"><strong>Приоритет:</strong>
+                    {% if request.priority == 3 %}Высокий
+                    {% elif request.priority == 2 %}Средний
+                    {% else %}Низкий{% endif %}
+                </p>
+                <p style="margin: 5px 0;"><strong>Описание:</strong></p>
+                <p style="margin: 5px 0; background: white; padding: 10px; border-radius: 5px;">{{ request.description }}</p>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ site_url }}{% url 'my_requests' %}"
+                   style="background: linear-gradient(135deg, #E2725B 0%, #CC5A4F 100%); color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block;">
+                    Посмотреть мои заявки
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="background: #f8f9fa; padding: 20px; text-align: center; color: #6c757d; font-size: 12px; border-top: 1px solid #dee2e6;">
+            <p style="margin: 0 0 5px 0;">С уважением, команда УК "Новый город"</p>
+            <p style="margin: 0;">г. Новокузнецк, ул. Павловского, д.11а</p>
+            <p style="margin: 10px 0 0 0; font-size: 11px; color: #999;">
+                Это письмо отправлено автоматически, пожалуйста, не отвечайте на него.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

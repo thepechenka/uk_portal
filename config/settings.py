@@ -126,3 +126,7 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/accounts/profile/'
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/accounts/profile/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+
+ADMINS = [
+    ('Администратор', 'nikita.bulatov777@mail.ru'),
+]

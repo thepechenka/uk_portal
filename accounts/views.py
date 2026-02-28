@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import login
@@ -43,6 +43,44 @@ def send_verification_email(request, user):
         html_message=html_message,
         fail_silently=False,
     )
+
+
+def send_request_notification(request_obj):
+    """Отправляет уведомление о новой заявке на email пользователя и админам"""
+    user = request_obj.user
+    site_url = 'http://127.0.0.1:8000'  # замените на ваш домен в продакшене
+
+    # HTML шаблон для письма
+    html_message = render_to_string('account/email/new_request_notification.html', {
+        'request': request_obj,
+        'user': user,
+        'site_url': site_url,
+    })
+    plain_message = strip_tags(html_message)
+
+    # Отправка пользователю
+    send_mail(
+        subject=f'Новая заявка #{request_obj.id} создана',
+        message=plain_message,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=[user.email],
+        html_message=html_message,
+        fail_silently=False,
+    )
+
+    # Отправка админам (если они есть в settings)
+    if hasattr(settings, 'ADMINS') and settings.ADMINS:
+        admin_emails = [admin[1] for admin in settings.ADMINS]
+        send_mail(
+            subject=f'Новая заявка #{request_obj.id} от {user.full_name}',
+            message=plain_message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=admin_emails,
+            html_message=html_message,
+            fail_silently=False,
+        )
+
+    logger.info(f"Уведомление о заявке #{request_obj.id} отправлено на {user.email}")
 
 
 def validate_registration_data(email, full_name, password1, password2):
@@ -279,6 +317,15 @@ def my_requests_view(request):
     }
 
     return render(request, 'account/my_requests.html', context)
+
+
+# Функция для вызова из view создания заявки
+def send_request_email_notification(request_obj):
+    """Обертка для отправки уведомления о заявке"""
+    try:
+        send_request_notification(request_obj)
+    except Exception as e:
+        logger.error(f"Ошибка отправки уведомления о заявке #{request_obj.id}: {str(e)}")
 
 
 class CustomPasswordResetView(PasswordResetView):
