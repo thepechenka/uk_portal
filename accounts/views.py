@@ -17,6 +17,7 @@ import logging
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -286,10 +287,15 @@ def profile_view(request):
                 user.save()
                 messages.success(request, 'Профиль обновлен')
 
+    # Получаем новости для дома пользователя
+    from core.views import get_user_house_news  # импорт функции
+    house_news = get_user_house_news(user)
+
     context = {
         'user': user,
         'stats': get_user_stats(user),
         'requests': get_recent_requests(user),
+        'house_news': house_news,  # ← ДОБАВИЛИ!
     }
 
     return render(request, 'account/profile.html', context)

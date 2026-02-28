@@ -184,6 +184,15 @@ class News(models.Model):
     created_at = models.DateTimeField(_('Дата создания'), auto_now_add=True)
     updated_at = models.DateTimeField(_('Дата обновления'), auto_now=True)
 
+    # Добавляем связь с домами
+    houses = models.ManyToManyField(
+        House,
+        verbose_name=_('Дома'),
+        related_name='news',
+        blank=True,
+        help_text=_('Выберите дома, для которых предназначена новость')
+    )
+
     class Meta:
         verbose_name = _('Новость')
         verbose_name_plural = _('Новости')
@@ -192,6 +201,9 @@ class News(models.Model):
     def __str__(self):
         return self.title
 
+    def is_for_all_houses(self):
+        """Проверяет, предназначена ли новость для всех домов"""
+        return not self.houses.exists()
 
 class HouseReport(models.Model):
     """Модель для отчетов по дому"""

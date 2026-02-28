@@ -4,12 +4,12 @@ from django.contrib import messages
 from django.views.generic import ListView
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
+from django.db import models
 
 from .models import News, Request, Comment, House
 from .forms import RequestForm, CommentForm
 from accounts.decorators import apartment_required
-from accounts.views import send_request_email_notification  # ИМПОРТИРУЕМ ФУНКЦИЮ
-
+from accounts.views import send_request_email_notification
 
 import logging
 logger = logging.getLogger(__name__)
@@ -29,6 +29,7 @@ class HomeView(ListView):
     paginate_by = 3
 
     def get_queryset(self):
+        # На главной показываем все новости (для всех)
         return News.objects.filter(is_published=True).order_by('-created_at')
 
     def get_context_data(self, **kwargs):
@@ -158,4 +159,19 @@ class NewsListView(ListView):
     paginate_by = 9
 
     def get_queryset(self):
+        # На странице всех новостей показываем ВСЕ новости
         return News.objects.filter(is_published=True).order_by('-created_at')
+
+
+def get_user_house_news(user):
+    """Возвращает новости для дома пользователя"""
+    if user.is_authenticated and hasattr(user, 'apartment') and user.apartment:
+        user_house = user.apartment.house
+        # Новости либо для всех домов, либо конкретно для его дома
+        return News.objects.filter(
+            is_published=True
+        ).filter(
+            models.Q(houses__isnull=True) |  # новости для всех домов
+            models.Q(houses=user_house)       # новости для его дома
+        ).distinct().order_by('-created_at')[:5]  # последние 5 новостей
+    return []
