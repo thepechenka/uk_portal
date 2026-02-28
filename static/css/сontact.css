@@ -3,28 +3,58 @@
     padding: 80px 0;
 }
 
+/* Стили для заголовков */
+.contact-section h1.display-4 {
+    color: #E2725B;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.contact-section .lead {
+    color: #6c757d;
+    margin-bottom: 2rem;
+}
+
 /* Стили для ссылок */
 .contact-link {
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .contact-link:hover {
     opacity: 0.8;
+    transform: translateY(-3px);
 }
 
 /* Стили для быстрых контактов */
 .quick-contact-item {
     width: 100px;
     text-align: center;
+    padding: 10px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.quick-contact-item:hover {
+    background-color: #f8f9fa;
 }
 
 .quick-contact-item i {
     font-size: 2rem;
     color: #E2725B;
+    transition: all 0.3s ease;
+}
+
+.quick-contact-item:hover i {
+    transform: scale(1.1);
 }
 
 .quick-contact-item .text-muted {
     font-size: 0.875rem;
+    transition: color 0.3s ease;
+}
+
+.quick-contact-item:hover .text-muted {
+    color: #E2725B !important;
 }
 
 /* Стили для карты */
@@ -32,15 +62,50 @@
     width: 100%;
     height: 350px;
     border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для информации */
+.border-bottom {
+    border-bottom: 1px solid #f0f0f0 !important;
+    margin-bottom: 1rem !important;
+}
+
+.text-muted.small {
+    font-size: 0.875rem;
 }
 
 /* Адаптивность */
+@media (max-width: 992px) {
+    .contact-section {
+        padding: 60px 0;
+    }
+}
+
 @media (max-width: 768px) {
+    .contact-section {
+        padding: 40px 0;
+    }
+
     .quick-contact-item {
         width: 80px;
     }
 
     .quick-contact-item i {
         font-size: 1.5rem;
+    }
+
+    #contact-map {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quick-contact-item {
+        width: 70px;
+    }
+
+    .d-flex.justify-content-center {
+        gap: 10px !important;
     }
 }

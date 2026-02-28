@@ -1,0 +1,60 @@
+.status-badge {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+    .status-new { background-color: #ffc107; color: #000; }
+    .status-in_progress { background-color: #0dcaf0; color: #fff; }
+    .status-done { background-color: #198754; color: #fff; }
+    .status-cancelled { background-color: #6c757d; color: #fff; }
+
+    .apartment-card {
+        border-left: 4px solid #198754;
+    }
+
+    .list-group-item.disabled {
+        pointer-events: none;
+        opacity: 0.6;
+    }
+
+    .payment-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        height: 100%;
+    }
+
+    .payment-link:visited,
+    .payment-link:link,
+    .payment-link:hover,
+    .payment-link:active {
+        color: inherit;
+    }
+
+    .payment-card {
+        background: #f8f9fa;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        border: 1px solid #dee2e6;
+        height: 100%;
+    }
+
+    .payment-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(226, 114, 91, 0.25);
+        border-color: #E2725B;
+        background: white;
+    }
+
+    .payment-card:hover i {
+        color: #E2725B !important;
+    }
+
+    .payment-card:hover h6 {
+        color: #E2725B !important;
+    }
+
+    .payment-card:hover small {
+        color: #E2725B !important;
+    }

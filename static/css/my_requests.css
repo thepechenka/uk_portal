@@ -1,0 +1,55 @@
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.card-header .badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+}
+
+.card-footer {
+    font-size: 0.9rem;
+}
+
+.modal-body .bg-light {
+    background-color: #f8f9fa !important;
+    border: 1px solid #dee2e6;
+}
+
+.modal-body .bg-info {
+    background-color: rgba(13, 202, 240, 0.1) !important;
+}
+
+.pagination .page-link {
+    color: #E2725B;
+}
+
+.pagination .active .page-link {
+    background-color: #E2725B;
+    border-color: #E2725B;
+    color: white;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px !important;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: start !important;
+        gap: 10px;
+    }
+
+    .card-header .badge {
+        align-self: flex-start;
+    }
+}

@@ -1,6 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Мои заявки{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/my_requests.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="container py-5">
@@ -207,44 +212,8 @@
         </div>
     {% endif %}
 </div>
+{% endblock %}
 
-<script>
-// Восстановление выбранных значений из URL
-document.addEventListener('DOMContentLoaded', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    // Восстанавливаем статус
-    const statusSelect = document.querySelector('select[name="status"]');
-    if (urlParams.has('status')) {
-        statusSelect.value = urlParams.get('status');
-    }
-
-    // Восстанавливаем тип заявки
-    const typeSelect = document.querySelector('select[name="request_type"]');
-    if (urlParams.has('request_type')) {
-        typeSelect.value = urlParams.get('request_type');
-    }
-
-    // Восстанавливаем приоритет
-    const prioritySelect = document.querySelector('select[name="priority"]');
-    if (urlParams.has('priority')) {
-        prioritySelect.value = urlParams.get('priority');
-    }
-
-    // Восстанавливаем дату
-    const dateInput = document.querySelector('input[name="date"]');
-    if (urlParams.has('date')) {
-        dateInput.value = urlParams.get('date');
-    }
-});
-</script>
-
-<style>
-    .status-badge {
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        font-weight: 600;
-    }
-</style>
+{% block extra_js %}
+    <script src="{% static 'js/my_requests.js' %}"></script>
 {% endblock %}
