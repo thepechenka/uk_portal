@@ -50,33 +50,39 @@ def send_request_notification(request_obj):
     user = request_obj.user
     site_url = 'http://127.0.0.1:8000'  # замените на ваш домен в продакшене
 
-    # HTML шаблон для письма
-    html_message = render_to_string('account/email/new_request_notification.html', {
+    # 1. Отправка пользователю (существующий шаблон)
+    user_html = render_to_string('account/email/new_request_notification.html', {
         'request': request_obj,
         'user': user,
         'site_url': site_url,
     })
-    plain_message = strip_tags(html_message)
+    user_plain = strip_tags(user_html)
 
-    # Отправка пользователю
     send_mail(
         subject=f'Новая заявка #{request_obj.id} создана',
-        message=plain_message,
+        message=user_plain,
         from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=[user.email],
-        html_message=html_message,
+        html_message=user_html,
         fail_silently=False,
     )
 
-    # Отправка админам (если они есть в settings)
+    # 2. Отправка админам (НОВЫЙ шаблон)
     if hasattr(settings, 'ADMINS') and settings.ADMINS:
+        admin_html = render_to_string('account/email/admin_request_notification.html', {
+            'request': request_obj,
+            'user': user,
+            'site_url': site_url,
+        })
+        admin_plain = strip_tags(admin_html)
+
         admin_emails = [admin[1] for admin in settings.ADMINS]
         send_mail(
-            subject=f'Новая заявка #{request_obj.id} от {user.full_name}',
-            message=plain_message,
+            subject=f'❗ НОВАЯ ЗАЯВКА #{request_obj.id} от {user.full_name}',
+            message=admin_plain,
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=admin_emails,
-            html_message=html_message,
+            html_message=admin_html,
             fail_silently=False,
         )
 

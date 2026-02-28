@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Новая заявка #{{ request.id }} | Админка</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333333; margin: 0; padding: 0; background-color: #f5f5f5;">
+    <div style="max-width: 600px; margin: 20px auto; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+
+        <!-- Шапка -->
+        <div style="background: linear-gradient(135deg, #E2725B 0%, #CC5A4F 100%); color: white; padding: 30px 20px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px; font-weight: normal;">УК "Новый город"</h1>
+            <p style="margin: 10px 0 0 0; font-size: 18px;">Новая заявка #{{ request.id }}</p>
+        </div>
+
+        <!-- Содержание -->
+        <div style="padding: 30px 25px;">
+
+            <p style="font-size: 16px; margin-top: 0; padding: 10px; background: #f8f9fa; border-left: 4px solid #E2725B;">
+                <strong>Поступила новая заявка от пользователя</strong>
+            </p>
+
+            <!-- Данные пользователя -->
+            <h3 style="color: #E2725B; font-size: 18px; margin: 25px 0 15px 0; padding-bottom: 8px; border-bottom: 1px solid #dee2e6;">Данные заявителя</h3>
+
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <tr>
+                    <td style="padding: 8px 0; width: 120px; color: #666;">ФИО:</td>
+                    <td style="padding: 8px 0; font-weight: bold;">{{ user.full_name }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; color: #666;">Email:</td>
+                    <td style="padding: 8px 0;">{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; color: #666;">Телефон:</td>
+                    <td style="padding: 8px 0;">{{ user.phone|default:"Не указан" }}</td>
+                </tr>
+            </table>
+
+            <!-- Данные квартиры -->
+            {% if user.apartment %}
+            <h3 style="color: #E2725B; font-size: 18px; margin: 25px 0 15px 0; padding-bottom: 8px; border-bottom: 1px solid #dee2e6;">Квартира</h3>
+
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <tr>
+                    <td style="padding: 8px 0; width: 120px; color: #666;">Адрес:</td>
+                    <td style="padding: 8px 0;">{{ user.apartment.house.address }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; color: #666;">Квартира:</td>
+                    <td style="padding: 8px 0;">№{{ user.apartment.number }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; color: #666;">Лицевой счет:</td>
+                    <td style="padding: 8px 0;">{{ user.apartment.account_number }}</td>
+                </tr>
+            </table>
+            {% endif %}
+
+            <!-- Детали заявки -->
+            <h3 style="color: #E2725B; font-size: 18px; margin: 25px 0 15px 0; padding-bottom: 8px; border-bottom: 1px solid #dee2e6;">Детали заявки</h3>
+
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <tr>
+                    <td style="padding: 8px 0; width: 120px; color: #666;">Тип:</td>
+                    <td style="padding: 8px 0;">{{ request.get_request_type_display }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; color: #666;">Приоритет:</td>
+                    <td style="padding: 8px 0;">
+                        {% if request.priority == 3 %}
+                            <span style="background: #dc3545; color: white; padding: 3px 10px; border-radius: 3px; font-size: 12px;">ВЫСОКИЙ</span>
+                        {% elif request.priority == 2 %}
+                            <span style="background: #ffc107; color: #333; padding: 3px 10px; border-radius: 3px; font-size: 12px;">СРЕДНИЙ</span>
+                        {% else %}
+                            <span style="background: #6c757d; color: white; padding: 3px 10px; border-radius: 3px; font-size: 12px;">НИЗКИЙ</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; color: #666;">Заголовок:</td>
+                    <td style="padding: 8px 0;">{{ request.title }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; color: #666;">Дата:</td>
+                    <td style="padding: 8px 0;">{{ request.created_at|date:"d.m.Y H:i" }}</td>
+                </tr>
+            </table>
+
+            <!-- Описание -->
+            <h3 style="color: #E2725B; font-size: 18px; margin: 25px 0 15px 0; padding-bottom: 8px; border-bottom: 1px solid #dee2e6;">Описание</h3>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; border: 1px solid #dee2e6; font-size: 14px;">
+                {{ request.description|linebreaks }}
+            </div>
+
+            <!-- Кнопки -->
+            <div style="text-align: center; margin: 35px 0 15px 0;">
+                <a href="http://127.0.0.1:8000/admin/core/request/{{ request.id }}/change/"
+                   style="background: #28a745; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 0 5px 10px 5px; font-size: 14px;">
+                    Открыть в админке
+                </a>
+            </div>
+        </div>
+
+        <!-- Подвал -->
+        <div style="background: #f8f9fa; padding: 20px; text-align: center; color: #6c757d; font-size: 12px; border-top: 1px solid #dee2e6;">
+            <p style="margin: 0 0 5px 0;">УК "Новый город" | г. Новокузнецк, ул. Павловского, д.11а</p>
+            <p style="margin: 0; font-size: 11px; color: #999;">Это письмо для администратора</p>
+        </div>
+    </div>
+</body>
+</html>
