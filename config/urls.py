@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from accounts.views import profile_view, my_requests_view, register_view, register_success_view, verify_email_view, resend_verification_email_view
 from accounts.views import CustomPasswordResetView
+from accounts.views import login_redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -21,6 +22,7 @@ urlpatterns = [
 
     # Allauth URLs
     path('accounts/', include('allauth.urls')),
+    path('login-redirect/', login_redirect, name='login_redirect')
 ]
 
 # Для медиа-файлов

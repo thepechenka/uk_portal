@@ -16,4 +16,8 @@ urlpatterns = [
     path('contact/', TemplateView.as_view(template_name='core/contact.html'), name='contact'),
 
     path('news/', views.NewsListView.as_view(), name='news_list'),
+    path('brigade/', views.brigade_dashboard, name='brigade_dashboard'),
+    path('brigade/take/<int:order_id>/', views.take_workorder, name='take_workorder'),
+    path('brigade/complete/<int:order_id>/', views.complete_workorder, name='complete_workorder'),
+    path('brigade/export/<int:order_id>/', views.export_order_report, name='export_order_report')
 ]

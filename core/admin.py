@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import House, Apartment, Request, Comment, News, HouseReport
-
+from .models import Brigade
 
 class HouseReportInline(admin.TabularInline):
 
@@ -88,3 +88,11 @@ class HouseReportAdmin(admin.ModelAdmin):
     list_filter = ('year', 'house')
     search_fields = ('house__address', 'title')
     readonly_fields = ('uploaded_at',)
+
+
+
+@admin.register(Brigade)
+class BrigadeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'chief')
+    filter_horizontal = ('members',)
+

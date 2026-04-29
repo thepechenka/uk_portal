@@ -1,0 +1,114 @@
+{% extends 'brigade_base.html' %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header">Состав бригады</div>
+    <div class="card-body">
+        <div><strong>Бригадир:</strong> {{ brigade.chief.full_name }}</div>
+        <div><strong>Члены:</strong>
+            {% for member in brigade.members.all %}
+                {{ member.full_name }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                —
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% if current_order %}
+<div class="card">
+    <div class="card-header">Текущая задача</div>
+    <div class="card-body">
+        <h4>{{ current_order.title }}</h4>
+        <p><strong>Адрес:</strong> {{ current_order.apartment.house.address }}, кв. {{ current_order.apartment.number }}</p>
+        <p><strong>Описание:</strong> {{ current_order.description }}</p>
+        <a href="{% url 'complete_workorder' current_order.id %}" class="btn btn-success">Завершить и отчитаться</a>
+    </div>
+</div>
+{% endif %}
+
+<div class="card">
+    <div class="card-header">Доступные заявки ({{ available_orders.count }})</div>
+    <div class="card-body">
+        {% if available_orders %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Заявка</th>
+                        <th>Адрес</th>
+                        <th>Приоритет</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in available_orders %}
+                    <tr>
+                        <td>#{{ order.id }}</td>
+                        <td>{{ order.title }}</td>
+                        <td>{{ order.apartment.house.address }}, кв.{{ order.apartment.number }}</td>
+                        <td>
+                            {% if order.priority == 3 %}
+                                <span class="badge badge-danger">Высокий</span>
+                            {% elif order.priority == 2 %}
+                                <span class="badge badge-warning">Средний</span>
+                            {% else %}
+                                <span class="badge badge-info">Низкий</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if current_order %}
+                                <span class="text-muted">Заняты</span>
+                            {% else %}
+                                <a href="{% url 'take_workorder' order.id %}" class="btn btn-primary btn-sm">Взять</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted">Нет доступных заявок</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">История выполненных работ ({{ completed_orders.count }})</div>
+    <div class="card-body">
+        {% if completed_orders %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Заявка</th>
+                        <th>Материалы</th>
+                        <th>Часы</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in completed_orders %}
+                    <tr>
+                        <td>{{ order.completed_at|date:"d.m.Y" }}</td>
+                        <td>{{ order.title }}</td>
+                        <td>{{ order.resources_used|truncatewords:8|default:"-" }}</td>
+                        <td>{{ order.hours_worked|default:"-" }}</td>
+                        <td>
+                            <a href="{% url 'export_order_report' order.id %}" class="btn btn-sm btn-outline-primary">PDF</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted">Нет завершённых работ</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

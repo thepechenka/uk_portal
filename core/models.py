@@ -88,7 +88,6 @@ class Apartment(models.Model):
 
 
 class Request(models.Model):
-
     class RequestType(models.TextChoices):
         REPAIR = 'repair', _('Ремонт')
         EMERGENCY = 'emergency', _('Аварийная')
@@ -143,6 +142,20 @@ class Request(models.Model):
     updated_at = models.DateTimeField(_('Дата обновления'), auto_now=True)
     completed_at = models.DateTimeField(_('Дата завершения'), blank=True, null=True)
 
+    # ПОЛЯ ДЛЯ БРИГАДЫ
+    assigned_team = models.ForeignKey(
+        'Brigade',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Бригада',
+        related_name='requests'
+    )
+    resources_used = models.TextField('Потраченные ресурсы', blank=True)
+    work_started_at = models.DateTimeField('Начало работ', null=True, blank=True)
+    hours_worked = models.FloatField('Часов затрачено', null=True, blank=True)
+    work_notes = models.TextField('Примечания бригады', blank=True)
+
     class Meta:
         verbose_name = _('Заявка')
         verbose_name_plural = _('Заявки')
@@ -150,7 +163,6 @@ class Request(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.get_status_display()}"
-
 
 class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -235,3 +247,28 @@ class HouseReport(models.Model):
         if not self.title:
             self.title = f"Отчет за {self.year} год"
         super().save(*args, **kwargs)
+
+
+class Brigade(models.Model):
+    name = models.CharField('Название бригады', max_length=100)
+    chief = models.OneToOneField(
+        'accounts.CustomUser',
+        on_delete=models.CASCADE,
+        verbose_name='Бригадир',
+        related_name='brigade_chief'
+    )
+    members = models.ManyToManyField(
+        'accounts.CustomUser',
+        blank=True,
+        verbose_name='Члены бригады',
+        related_name='brigade_member'
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Бригада'
+        verbose_name_plural = 'Бригады'
+
+

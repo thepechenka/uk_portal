@@ -101,6 +101,8 @@ class CustomUser(AbstractUser):
         default=False
     )
 
+    is_brigade_chief = models.BooleanField('Бригадир', default=False)
+
     created_at = models.DateTimeField(
         _('Дата создания'),
         auto_now_add=True

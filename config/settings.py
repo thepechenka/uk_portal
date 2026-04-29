@@ -123,10 +123,20 @@ SERVER_EMAIL = 'nikita.bulatov777@mail.ru'
 
 # URL редиректов
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/accounts/profile/'
+LOGIN_REDIRECT_URL = 'login_redirect'
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/accounts/profile/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
 ADMINS = [
     ('Администратор', 'nikita.bulatov777@mail.ru'),
 ]
+
+# Отключаем сообщения авторизации
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Или полностью отключаем сообщения Django
+from django.contrib.messages import constants as messages
+MESSAGE_LEVEL = messages.ERROR  # Показывать только ошибки, не успех

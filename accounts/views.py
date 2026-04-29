@@ -16,7 +16,8 @@ from django.urls import reverse_lazy
 import logging
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 logger = logging.getLogger(__name__)
 
@@ -356,3 +357,16 @@ class CustomPasswordResetFromKeyView(PasswordResetFromKeyView):
     def dispatch(self, request, *args, **kwargs):
         logger.info(f"Password reset from key view called: {request.path}")
         return super().dispatch(request, *args, **kwargs)
+
+
+@login_required
+def login_redirect(request):
+    """Перенаправление после входа"""
+    user = request.user
+
+    # Если пользователь — бригадир или член бригады
+    if hasattr(user, 'brigade_chief') or user.brigade_member.exists():
+        return redirect('brigade_dashboard')
+
+    # Обычный житель
+    return redirect('profile')

@@ -1,0 +1,31 @@
+{% extends 'brigade_base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">Отчёт о выполненной работе</div>
+    <div class="card-body">
+        <h4>{{ order.title }}</h4>
+        <p>{{ order.apartment.house.address }}, кв. {{ order.apartment.number }}</p>
+        <p>{{ order.description }}</p>
+        <hr>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Использованные материалы</label>
+                <textarea name="materials_used" class="form-control" rows="4" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Затрачено часов</label>
+                <input type="number" name="hours_worked" class="form-control" step="0.5" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Примечания</label>
+                <textarea name="notes" class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Завершить</button>
+            <a href="{% url 'brigade_dashboard' %}" class="btn btn-outline-secondary">Назад</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
