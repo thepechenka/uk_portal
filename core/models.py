@@ -271,4 +271,16 @@ class Brigade(models.Model):
         verbose_name = 'Бригада'
         verbose_name_plural = 'Бригады'
 
+class Material(models.Model):
+    name = models.CharField('Наименование материала', max_length=200)
+    unit = models.CharField('Единица измерения', max_length=20, default='шт')
+    price = models.DecimalField('Цена', max_digits=10, decimal_places=2, null=True, blank=True)
+    in_stock = models.BooleanField('В наличии', default=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.unit})"
+
+    class Meta:
+        verbose_name = 'Материал'
+        verbose_name_plural = 'Материалы'
 

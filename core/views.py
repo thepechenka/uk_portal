@@ -11,7 +11,6 @@ from .forms import RequestForm, CommentForm
 from accounts.decorators import apartment_required
 from accounts.views import send_request_email_notification
 
-# Добавь в начало файла с другими импортами
 from django.http import HttpResponse
 import io
 from reportlab.lib.pagesizes import A4
@@ -19,7 +18,7 @@ from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import mm
-
+from .models import Material
 
 import logging
 logger = logging.getLogger(__name__)
@@ -357,3 +356,32 @@ def export_order_report(request, order_id):
     '''
 
     return HttpResponse(html)
+
+
+@login_required
+def complete_workorder(request, order_id):
+    brigade = request.user.brigade_chief if hasattr(request.user,
+                                                    'brigade_chief') else request.user.brigade_member.first()
+    order = get_object_or_404(Request, id=order_id, assigned_team=brigade, status='in_progress')
+
+    if request.method == 'POST':
+        # Получаем выбранные материалы (список из POST)
+        selected_materials = request.POST.getlist('materials_used')
+        # Сохраняем как JSON или как текст через запятую
+        import json
+        order.resources_used = json.dumps(selected_materials, ensure_ascii=False)
+        order.hours_worked = request.POST.get('hours_worked', '')
+        order.work_notes = request.POST.get('notes', '')
+        order.status = 'done'
+        order.completed_at = timezone.now()
+        order.save()
+
+        messages.success(request, 'Заявка успешно завершена!')
+        return redirect('brigade_dashboard')
+
+    materials = Material.objects.filter(in_stock=True)
+    return render(request, 'core/brigade/complete.html', {
+        'order': order,
+        'brigade': brigade,
+        'materials': materials,
+    })

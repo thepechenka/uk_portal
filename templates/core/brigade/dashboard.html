@@ -51,11 +51,13 @@
                         <td>{{ order.apartment.house.address }}, кв.{{ order.apartment.number }}</td>
                         <td>
                             {% if order.priority == 3 %}
-                                <span class="badge badge-danger">Высокий</span>
+                                <span class="badge bg-danger">Высокий</span>
                             {% elif order.priority == 2 %}
-                                <span class="badge badge-warning">Средний</span>
+                                <span class="badge bg-warning">Средний</span>
+                            {% elif order.priority == 1 %}
+                                <span class="badge bg-info">Низкий</span>
                             {% else %}
-                                <span class="badge badge-info">Низкий</span>
+                                <span class="badge bg-secondary">Не указан</span>
                             {% endif %}
                         </td>
                         <td>
@@ -96,10 +98,16 @@
                     <tr>
                         <td>{{ order.completed_at|date:"d.m.Y" }}</td>
                         <td>{{ order.title }}</td>
-                        <td>{{ order.resources_used|truncatewords:8|default:"-" }}</td>
+                        <td>
+                            {% if order.resources_used %}
+                                {{ order.resources_used|truncatechars:60 }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
                         <td>{{ order.hours_worked|default:"-" }}</td>
                         <td>
-                            <a href="{% url 'export_order_report' order.id %}" class="btn btn-sm btn-outline-primary">PDF</a>
+                            <a href="{% url 'export_order_report' order.id %}" class="btn btn-sm btn-outline-primary">Отчёт</a>
                         </td>
                     </tr>
                     {% endfor %}
