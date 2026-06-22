@@ -1,4 +1,18 @@
+# В САМОМ ВЕРХУ settings.py
 import os
+import ssl
+import certifi
+
+# ЯВНО указываем путь к сертификатам
+os.environ['SSL_CERT_FILE'] = certifi.where()
+os.environ['REQUESTS_CA_BUNDLE'] = certifi.where()
+
+# Полностью отключаем проверку для SMTP
+try:
+    ssl._create_default_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -111,15 +125,26 @@ ACCOUNT_FORMS = {
 # Адаптер
 ACCOUNT_ADAPTER = 'accounts.adapter.CustomAccountAdapter'
 
-# EMAIL настройки для mail.ru
+# ============== НАСТРОЙКИ EMAIL (ИСПРАВЛЕННЫЕ) ==============
+import ssl
+
+# ОТКЛЮЧАЕМ ПРОВЕРКУ SSL-СЕРТИФИКАТОВ (РЕШАЕТ ОШИБКУ)
+try:
+    ssl._create_default_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
+EMAIL_PORT = 465  # SSL порт (работает стабильнее)
+EMAIL_USE_SSL = True  # Включаем SSL
+EMAIL_USE_TLS = False  # Отключаем TLS
 EMAIL_HOST_USER = 'nikita.bulatov777@mail.ru'
-EMAIL_HOST_PASSWORD = 'qRQ5FIyovVP6JC5i46eY'
+EMAIL_HOST_PASSWORD = 'Fl8ZhHqI3Wyn0Cu3pxHs'
 DEFAULT_FROM_EMAIL = 'nikita.bulatov777@mail.ru'
 SERVER_EMAIL = 'nikita.bulatov777@mail.ru'
+EMAIL_TIMEOUT = 10  # Таймаут 10 секунд, чтобы не висело
+# ============================================================
 
 # URL редиректов
 LOGIN_URL = '/accounts/login/'

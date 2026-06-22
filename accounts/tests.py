@@ -9,10 +9,8 @@ User = get_user_model()
 
 
 class CustomUserModelTests(TestCase):
-    """Тесты для модели CustomUser"""
 
     def setUp(self):
-        """Подготовка данных перед каждым тестом"""
         self.user_data = {
             'email': 'test@example.com',
             'full_name': 'Иванов Иван Иванович',
@@ -21,7 +19,6 @@ class CustomUserModelTests(TestCase):
         self.user = User.objects.create_user(**self.user_data)
 
     def test_create_user(self):
-        """Тест создания обычного пользователя"""
         self.assertEqual(self.user.email, 'test@example.com')
         self.assertEqual(self.user.full_name, 'Иванов Иван Иванович')
         self.assertTrue(self.user.check_password('testpass123'))
@@ -238,7 +235,6 @@ class AccountViewsTests(TestCase):
         self.assertTemplateUsed(response, 'account/login.html')
 
     def test_login_post_success(self):
-        """Тест успешного входа"""
         login_data = {
             'login': 'viewuser@example.com',
             'password': 'viewpass123'
